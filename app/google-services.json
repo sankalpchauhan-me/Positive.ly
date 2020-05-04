@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "667784859577",
+    "firebase_url": "https://positively-739c4.firebaseio.com",
+    "project_id": "positively-739c4",
+    "storage_bucket": "positively-739c4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667784859577:android:fa4d4c30256db4af457068",
+        "android_client_info": {
+          "package_name": "me.sankalpchauhan.positively"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667784859577-ik5ga95m6ur66prcc2kcj4eus1cp04qu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "me.sankalpchauhan.positively",
+            "certificate_hash": "be7673cd2a031a1f0eaa5948a71c35e4814f8fe6"
+          }
+        },
+        {
+          "client_id": "667784859577-e52e7eoiftkltc784at8hlshpqtcnep9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAibqRijnG4mqPutRV7mAaG5KNkF9toEDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667784859577-e52e7eoiftkltc784at8hlshpqtcnep9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

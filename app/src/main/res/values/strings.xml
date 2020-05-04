@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Positive.ly</string>
+    <string name="public_app_name">positive.ly</string>
+    <string name="enter_your_email">Enter your email</string>
+    <string name="continue_button_login">Password-less Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="account_login">Account login</string>
+    <string name="sign_in">Sign In</string>
+    <string name="quotes">Quotes</string>
+    <string name="podcasts">Podcasts</string>
+    <string name="record">record</string>
+    <string name="positively_podcasts">Positive.ly Podcasts</string>
+    <string name="positively_quotes">Positive.ly Quotes</string>
+</resources>

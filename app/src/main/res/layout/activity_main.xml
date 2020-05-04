@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.MainActivity"
+    android:id="@+id/parent_activity_main">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/app_bar" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottom_bar"
+        android:clickable="false"
+        app:fabAlignmentMode="center"
+        android:layout_gravity="bottom"
+        app:menu="@menu/bottom_navigation"
+        android:visibility="invisible"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:clickable="false"
+            android:layout_height="wrap_content"
+            app:menu="@menu/bottom_navigation"
+            />
+    </FrameLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/record_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_mic_black_24dp"
+        app:layout_anchor="@id/bottom_bar"/>
+
+    <!--<com.google.android.material.bottomappbar.BottomAppBar-->
+        <!--android:id="@+id/bottom_app_bar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--app:backgroundTint="@color/colorPrimary"-->
+        <!--app:fabAlignmentMode="center"-->
+        <!--app:menu="@menu/bottom_navigation"/>-->
+
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_mic_white_24dp"-->
+        <!--app:layout_anchor="@id/bottom_app_bar" />-->
+
+
+    <!--<com.google.android.material.bottomnavigation.BottomNavigationView-->
+        <!--android:id="@+id/bottom_navigation"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="?android:attr/windowBackground"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:menu="@menu/bottom_navigation"-->
+        <!--app:itemTextColor="@color/bottom_nav_color"-->
+        <!--app:itemIconTint="@color/bottom_nav_color"-->
+        <!--&gt;-->
+
+    <!--</com.google.android.material.bottomnavigation.BottomNavigationView>-->
+
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--android:elevation="20dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/bottom_navigation"-->
+        <!--app:layout_constraintHorizontal_bias="0.501"-->
+        <!--app:layout_constraintLeft_toRightOf="@id/bottom_navigation"-->
+        <!--app:layout_constraintRight_toLeftOf="@id/bottom_navigation"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/include"-->
+        <!--app:layout_constraintVertical_bias="0.941" />-->
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

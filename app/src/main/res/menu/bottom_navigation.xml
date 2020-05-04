@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_podcast"
+        android:icon="@drawable/ic_airplay_black_24dp"
+        android:title="@string/podcasts" />
+
+
+    <item
+        android:id="@+id/navigation_record"
+        android:title=""
+        android:checkable="false"
+        android:checked="false"
+        app:showAsAction="always"
+        android:enabled="false"
+        />
+
+    <item
+        android:id="@+id/navigation_quotes"
+        android:icon="@drawable/ic_format_quote_black_24dp"
+        android:title="@string/quotes" />
+
+</menu>
