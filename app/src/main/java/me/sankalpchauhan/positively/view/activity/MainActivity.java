@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -39,15 +42,23 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.config.DefaultPrefSettings;
+import me.sankalpchauhan.positively.service.model.Podcast;
+import me.sankalpchauhan.positively.service.model.ServerResult;
+import me.sankalpchauhan.positively.viewmodel.MainActivityViewModel;
 import timber.log.Timber;
 
 import static me.sankalpchauhan.positively.utils.utility.setSnackBar;
 
 public class MainActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener, BottomNavigationView.OnNavigationItemSelectedListener {
+    List<Podcast> podcastList = new ArrayList<>();
+    MainActivityViewModel mainActivityViewModel;
     @BindView(R.id.record_fab)
     FloatingActionButton recordFab;
     @BindView(R.id.parent_activity_main)
@@ -75,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         toolbar.setTitle(getResources().getString(R.string.positively_podcasts));
         setSupportActionBar(toolbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        initViewModel();
         try {
             PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES);
             appVersionName = pInfo.versionName;
@@ -102,6 +114,26 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, RecorderActivity.class);
                 startActivity(i);
+            }
+        });
+    }
+
+    private void initViewModel(){
+        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        mainActivityViewModel.init();
+        mainActivityViewModel.getPositivityPodcasts().observe(this, new Observer<ServerResult>() {
+            @Override
+            public void onChanged(ServerResult serverResult) {
+                //TODO: HIDE SHIMMER
+                if(serverResult!=null){
+                    List<Podcast> fetchedPodcastList = serverResult.getPodcasts();
+                    podcastList.addAll(fetchedPodcastList);
+                    Timber.e(podcastList.toString());
+                    //TODO: HIDE EMPTY STATE
+                } else {
+                    Toast.makeText(MainActivity.this, "Something Went Wrong...", Toast.LENGTH_SHORT).show();
+                    //TODO: SHOW EMPTY STATE
+                }
             }
         });
     }

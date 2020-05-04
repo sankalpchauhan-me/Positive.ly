@@ -10,4 +10,8 @@ public class Contants {
     public static final String USER_IS_ANONYMOUS = "anonymousUserLinkWithCredential";
     public static final int MY_PERMISSIONS_RECORD = 1101;
     public static final String RECORDING_PATH = "/Positively/Affirmations";
+    //max number of retries before fail
+    public static final int maxLimit = 3;
+    // wait for 5 second before retrying network request
+    public static final int waitThreshold = 5000;
 }
