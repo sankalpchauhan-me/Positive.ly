@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityOptionsCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -110,7 +111,8 @@ public class PodcastDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(PodcastDetailActivity.this, PodcastPlaybackActivity.class);
                 i.putExtra(Constants.PODCAST_DATA, podcast);
-                startActivity(i);
+                ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(PodcastDetailActivity.this,view, getResources().getString(R.string.podcast_share_view));
+                startActivity(i, option.toBundle());
             }
         });
     }

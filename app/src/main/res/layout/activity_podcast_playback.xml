@@ -5,76 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activity.PodcastPlaybackActivity"
+    android:id="@+id/podcast_parent"
     >
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/up_navigation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:transitionName="@string/podcast_share_view"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/ic_chevron_left_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/podcast_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Podcast Title"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/video_view"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:textSize="28sp"/>
 
     <com.google.android.exoplayer2.ui.PlayerView
         android:id="@+id/video_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/controls"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:use_controller="false" />
+
+    <com.google.android.exoplayer2.ui.PlayerControlView
+        android:id="@+id/controls"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:show_timeout="10000"
-        app:repeat_toggle_modes="none"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/video_view"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         app:fastforward_increment="10000"
-        app:rewind_increment="10000"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95"
+        app:repeat_toggle_modes="none"
+        app:rewind_increment="10000"
+        app:show_timeout="0" />
 
-    <!--<ImageView-->
-        <!--android:id="@+id/podcast_thumbnail"-->
-        <!--android:layout_width="300dp"-->
-        <!--android:layout_height="300dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginEnd="8dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--android:scaleType="centerCrop"-->
-        <!--android:src="@drawable/logo"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--/>-->
 
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="100dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="@id/podcast_thumbnail"-->
-        <!--app:layout_constraintVertical_bias="0.73">-->
-
-        <!--<LinearLayout-->
-            <!--android:id="@+id/llplayback"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content">-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/replay_10"-->
-                <!--android:layout_width="80dp"-->
-                <!--android:layout_height="80dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:src="@drawable/ic_replay_10_accent_24dp" />-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/play"-->
-                <!--android:layout_width="80dp"-->
-                <!--android:layout_height="80dp"-->
-                <!--android:layout_marginTop="0dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:src="@drawable/ic_play_arrow_accent_24dp" />-->
-
-            <!--<ImageView-->
-                <!--android:id="@+id/skip_10"-->
-                <!--android:layout_width="80dp"-->
-                <!--android:layout_height="80dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:src="@drawable/ic_forward_10_accent_24dp" />-->
-        <!--</LinearLayout>-->
-        <!--<SeekBar-->
-            <!--android:id="@+id/seekbar"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_below="@id/llplayback"-->
-            <!--style="@style/tallerBarStyle"-->
-            <!--android:layout_marginTop="20dp"/>-->
-    <!--</RelativeLayout>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
