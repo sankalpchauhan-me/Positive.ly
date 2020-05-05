@@ -55,7 +55,7 @@ public class Podcast implements Serializable {
     private Integer itunesId;
     @SerializedName("pub_date_ms")
     @Expose
-    private Integer pubDateMs;
+    private long pubDateMs;
     @SerializedName("id")
     @Expose
     private String id;
@@ -198,7 +198,7 @@ public class Podcast implements Serializable {
         this.itunesId = itunesId;
     }
 
-    public Integer getPubDateMs() {
+    public long getPubDateMs() {
         return pubDateMs;
     }
 

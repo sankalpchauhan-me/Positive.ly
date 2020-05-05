@@ -3,8 +3,9 @@ package me.sankalpchauhan.positively.view.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,19 +15,17 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.mikepenz.materialdrawer.AccountHeader;
@@ -51,12 +50,14 @@ import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.config.DefaultPrefSettings;
 import me.sankalpchauhan.positively.service.model.Podcast;
 import me.sankalpchauhan.positively.service.model.ServerResult;
+import me.sankalpchauhan.positively.view.fragments.PodcastFragment;
 import me.sankalpchauhan.positively.viewmodel.MainActivityViewModel;
 import timber.log.Timber;
 
+import static me.sankalpchauhan.positively.config.Constants.SERVER_DATA;
 import static me.sankalpchauhan.positively.utils.utility.setSnackBar;
 
-public class MainActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener, BottomNavigationView.OnNavigationItemSelectedListener{
     List<Podcast> podcastList = new ArrayList<>();
     MainActivityViewModel mainActivityViewModel;
     @BindView(R.id.record_fab)
@@ -67,6 +68,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
     Toolbar toolbar;
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
+    @BindView(R.id.shimmer_view_container)
+    ShimmerFrameLayout shimmerFrameLayout;
     private int appVersionCode;
     private String appVersionName;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         toolbar.setTitle(getResources().getString(R.string.positively_podcasts));
         setSupportActionBar(toolbar);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        shimmerFrameLayout.startShimmer();
         initViewModel();
         try {
             PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES);
@@ -113,7 +117,9 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, RecorderActivity.class);
-                startActivity(i);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation(MainActivity.this, (View)recordFab, getResources().getString(R.string.record_fab_transition));
+                startActivity(i, options.toBundle());
             }
         });
     }
@@ -124,13 +130,21 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         mainActivityViewModel.getPositivityPodcasts().observe(this, new Observer<ServerResult>() {
             @Override
             public void onChanged(ServerResult serverResult) {
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
                 //TODO: HIDE SHIMMER
                 if(serverResult!=null){
                     List<Podcast> fetchedPodcastList = serverResult.getPodcasts();
                     podcastList.addAll(fetchedPodcastList);
-                    Timber.e(podcastList.toString());
+                    PodcastFragment podcastFragment = new PodcastFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable(SERVER_DATA, serverResult);
+                    loadFragment(podcastFragment);
+                    for(Podcast podcast: podcastList){
+                        Timber.e("Podcast List: "+podcast.getTitleOriginal());
+                    }
                     //TODO: HIDE EMPTY STATE
-                } else {
+                } else{
                     Toast.makeText(MainActivity.this, "Something Went Wrong...", Toast.LENGTH_SHORT).show();
                     //TODO: SHOW EMPTY STATE
                 }
@@ -258,23 +272,34 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Fragment fragment = null;
         switch (menuItem.getItemId()){
             case R.id.navigation_podcast:
                 toolbar.setTitle(getResources().getString(R.string.positively_podcasts));
-                return true;
+                fragment = new PodcastFragment();
+                break;
             case R.id.navigation_record:
-                return true;
+                break;
             case R.id.navigation_quotes:
                 toolbar.setTitle(getResources().getString(R.string.positively_quotes));
-                return true;
+                break;
+        }
+       return loadFragment(fragment);
+    }
+
+    public boolean loadFragment(Fragment fragment) {
+        //switching fragment
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.activity_fragment, fragment)
+                    .commit();
+            return true;
         }
         return false;
     }
 
-    /**
-     * HttpResponse<JsonNode> response = Unirest.get("https://listen-api.listennotes.com/api/v2/search?q=star%20wars&sort_by_date=0&type=episode&offset=0&len_min=10&len_max=30&genre_ids=68%2C82&published_before=1580172454000&published_after=0&only_in=title%2Cdescription&language=English&safe_mode=0")
-     *   .header("X-ListenAPI-Key", "<SIGN UP FOR API KEY>")
-     *   .asJson();
-     */
-
+    public List<Podcast> getPodcastList(){
+        return podcastList;
+    }
 }

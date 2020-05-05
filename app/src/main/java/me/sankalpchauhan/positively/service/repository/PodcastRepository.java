@@ -46,6 +46,7 @@ public class PodcastRepository {
 
             @Override
             public void onFailure(Call<ServerResult> call, Throwable t) {
+                t.printStackTrace();
                 podcastMutableLiveData.setValue(null);
             }
         });

@@ -1,11 +1,8 @@
 package me.sankalpchauhan.positively.view.activity;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -15,22 +12,18 @@ import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,8 +34,8 @@ import me.sankalpchauhan.positively.BuildConfig;
 import me.sankalpchauhan.positively.R;
 import timber.log.Timber;
 
-import static me.sankalpchauhan.positively.config.Contants.MY_PERMISSIONS_RECORD;
-import static me.sankalpchauhan.positively.config.Contants.RECORDING_PATH;
+import static me.sankalpchauhan.positively.config.Constants.MY_PERMISSIONS_RECORD;
+import static me.sankalpchauhan.positively.config.Constants.RECORDING_PATH;
 
 public class AudioRecordingActivity extends AppCompatActivity implements MediaPlayer.OnCompletionListener {
     @BindView(R.id.chronometerTimer)
@@ -96,7 +89,6 @@ public class AudioRecordingActivity extends AppCompatActivity implements MediaPl
     public void recordingPreparation() {
         Timber.d("I am here 1");
         playPause.setImageDrawable(getResources().getDrawable(R.drawable.ic_pause_black_24dp));
-        //playLL.setVisibility(View.GONE);
         playPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,17 +141,6 @@ public class AudioRecordingActivity extends AppCompatActivity implements MediaPl
         }
     }
 
-//    private void stopPlaying() {
-//        try {
-//            mPlayer.release();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        mPlayer = null;
-//        chronometer.stop();
-//
-//    }
-
     private void startRecording() {
         Timber.d("I am here 3");
         mRecorder = new MediaRecorder();
@@ -195,8 +176,6 @@ public class AudioRecordingActivity extends AppCompatActivity implements MediaPl
             Timber.d("I am here 7");
         }
         previousProgress = 0;
-//        seekBar.setProgress(0);
-        //stopPlaying();
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.start();
     }
@@ -215,53 +194,6 @@ public class AudioRecordingActivity extends AppCompatActivity implements MediaPl
         chronometer.setBase(SystemClock.elapsedRealtime());
         Toast.makeText(this, "Voice Log Saved", Toast.LENGTH_SHORT).show();
     }
-
-//    private void startPlaying() {
-//        mPlayer = new MediaPlayer();
-//        try {
-//            mPlayer.setDataSource(fileName);
-//            mPlayer.prepare();
-//            mPlayer.start();
-//        } catch (IOException e) {
-//            Timber.e("failed");
-//        }
-//        seekBar.setProgress(previousProgress);
-//        mPlayer.seekTo(previousProgress);
-//        seekBar.setMax(mPlayer.getDuration());
-//        seekUpdation();
-//        chronometer.start();
-//        mPlayer.setOnCompletionListener(this);
-//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//                if (mPlayer != null && fromUser) {
-//                    mPlayer.seekTo(progress);
-//                    chronometer.setBase(SystemClock.elapsedRealtime() - mPlayer.getCurrentPosition());
-//                    previousProgress = progress;
-//                }
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
-//    }
-
-//    private void seekUpdation() {
-//        if (mPlayer != null) {
-//            int mCurrentPosition = mPlayer.getCurrentPosition();
-//            seekBar.setProgress(mCurrentPosition);
-//            previousProgress = mCurrentPosition;
-//        }
-//        //mHandler.postDelayed(runnable, 100);
-//    }
-
 
     @Override
     public void onBackPressed() {

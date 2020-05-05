@@ -11,4 +11,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--<style name="AppTheme.Transparent" parent="AppTheme">-->
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+        <!--<item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
+    <!--</style>-->
+
+    <style name="tallerBarStyle" parent="@android:style/Widget.SeekBar">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@android:drawable/progress_horizontal</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_horizontal</item>
+        <item name="android:minHeight">8dip</item>
+        <item name="android:maxHeight">20dip</item>
+    </style>
+
 </resources>

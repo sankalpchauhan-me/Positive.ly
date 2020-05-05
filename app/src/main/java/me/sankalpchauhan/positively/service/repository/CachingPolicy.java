@@ -14,8 +14,8 @@ import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import static me.sankalpchauhan.positively.PositivelyApp.getContext;
-import static me.sankalpchauhan.positively.config.Contants.maxLimit;
-import static me.sankalpchauhan.positively.config.Contants.waitThreshold;
+import static me.sankalpchauhan.positively.config.Constants.maxLimit;
+import static me.sankalpchauhan.positively.config.Constants.waitThreshold;
 
 /**
  * Retry Policy in case the request fails initially
@@ -29,7 +29,7 @@ public class CachingPolicy {
     public static final String CACHE_CONTROL = "Cache-Control";
     public static final String PRAGMA = "Pragma";
     public static final String REVALIDATE_STRATEGY = "must-revalidate";
-    public static final Integer MAX_AGE = 5000;
+    public static final Integer MAX_AGE = 5000*60;
     public static final Integer MAX_FILE_SIZE = 10 * 1024 * 1024; //10 MB
     public static final Interceptor REWRITE_RESPONSE_INTERCEPTOR = new Interceptor() {
         @Override

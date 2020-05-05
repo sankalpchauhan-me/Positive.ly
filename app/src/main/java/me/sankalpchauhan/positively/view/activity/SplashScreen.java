@@ -12,7 +12,7 @@ import me.sankalpchauhan.positively.service.model.User;
 import me.sankalpchauhan.positively.viewmodel.LoginViewModel;
 import timber.log.Timber;
 
-import static me.sankalpchauhan.positively.config.Contants.USER;
+import static me.sankalpchauhan.positively.config.Constants.USER;
 
 public class SplashScreen extends AppCompatActivity {
     private LoginViewModel splashViewModel;

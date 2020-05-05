@@ -5,11 +5,73 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.activity.MainActivity"
-    android:id="@+id/parent_activity_main">
+    android:id="@+id/parent_activity_main"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto">
 
     <include
         android:id="@+id/include"
         layout="@layout/app_bar" />
+    <FrameLayout
+        android:id="@+id/activity_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?actionBarSize"
+        android:layout_marginBottom="?actionBarSize">
+    </FrameLayout>
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_placeholder" />
+
+                <include layout="@layout/shimmer_placeholder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_placeholder" />
+
+                <include layout="@layout/shimmer_placeholder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_placeholder" />
+
+                <include layout="@layout/shimmer_placeholder" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/shimmer_placeholder" />
+
+                <include layout="@layout/shimmer_placeholder" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
@@ -29,8 +91,9 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
-            android:clickable="false"
             android:layout_height="wrap_content"
+            app:itemIconTint="@color/bottom_nav_color"
+            app:itemTextColor="@color/bottom_nav_color"
             app:menu="@menu/bottom_navigation"
             />
     </FrameLayout>
@@ -39,6 +102,7 @@
         android:id="@+id/record_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:transitionName="@string/record_fab_transition"
         android:src="@drawable/ic_mic_black_24dp"
         app:layout_anchor="@id/bottom_bar"/>
 

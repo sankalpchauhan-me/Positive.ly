@@ -26,6 +26,7 @@
 
 
     <ImageView
+        android:transitionName="@string/record_fab_transition"
         android:id="@+id/imageView2"
         android:layout_width="100dp"
         android:layout_height="100dp"

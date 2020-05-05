@@ -22,7 +22,7 @@ import me.sankalpchauhan.positively.config.DefaultPrefSettings;
 import me.sankalpchauhan.positively.service.model.User;
 import timber.log.Timber;
 
-import static me.sankalpchauhan.positively.config.Contants.USERS_COLLECTION;
+import static me.sankalpchauhan.positively.config.Constants.USERS_COLLECTION;
 
 /**
  * Contains all the methods related to FirebaseAuth

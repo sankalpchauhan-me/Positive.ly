@@ -37,7 +37,7 @@ import me.sankalpchauhan.positively.viewmodel.LoginViewModel;
 import timber.log.Timber;
 
 import static com.google.firebase.auth.FirebaseAuth.getInstance;
-import static me.sankalpchauhan.positively.config.Contants.USER;
+import static me.sankalpchauhan.positively.config.Constants.USER;
 import static me.sankalpchauhan.positively.utils.utility.isEmailValid;
 
 public class LoginActivity extends AppCompatActivity {

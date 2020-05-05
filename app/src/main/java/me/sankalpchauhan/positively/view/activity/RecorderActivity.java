@@ -3,6 +3,8 @@ package me.sankalpchauhan.positively.view.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,8 +17,6 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import me.sankalpchauhan.positively.service.model.VoiceLog;
 import me.sankalpchauhan.positively.view.adapters.RecorderAdapter;
 import timber.log.Timber;
 
-import static me.sankalpchauhan.positively.config.Contants.RECORDING_PATH;
+import static me.sankalpchauhan.positively.config.Constants.RECORDING_PATH;
 
 public class RecorderActivity extends AppCompatActivity {
     List<VoiceLog> voiceLogList = new ArrayList<>();
@@ -55,8 +55,9 @@ public class RecorderActivity extends AppCompatActivity {
         addFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(RecorderActivity.this, AudioRecordingActivity.class);
-                startActivity(i);
+                Intent intent = new Intent(RecorderActivity.this, AudioRecordingActivity.class);
+                ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(RecorderActivity.this,view, getResources().getString(R.string.record_fab_transition));
+                ActivityCompat.startActivity(RecorderActivity.this, intent, option.toBundle());
             }
         });
     }
@@ -113,9 +114,15 @@ public class RecorderActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                supportFinishAfterTransition();
                 onBackPressed();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 }

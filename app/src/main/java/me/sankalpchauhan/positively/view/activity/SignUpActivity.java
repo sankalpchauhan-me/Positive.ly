@@ -29,11 +29,11 @@ import me.sankalpchauhan.positively.service.model.User;
 import me.sankalpchauhan.positively.viewmodel.LoginViewModel;
 import timber.log.Timber;
 
-import static me.sankalpchauhan.positively.config.Contants.CREATE_ACCOUNT;
-import static me.sankalpchauhan.positively.config.Contants.NAV_TYPE;
-import static me.sankalpchauhan.positively.config.Contants.RC_SIGN_IN;
-import static me.sankalpchauhan.positively.config.Contants.SIGN_IN;
-import static me.sankalpchauhan.positively.config.Contants.USER;
+import static me.sankalpchauhan.positively.config.Constants.CREATE_ACCOUNT;
+import static me.sankalpchauhan.positively.config.Constants.NAV_TYPE;
+import static me.sankalpchauhan.positively.config.Constants.RC_SIGN_IN;
+import static me.sankalpchauhan.positively.config.Constants.SIGN_IN;
+import static me.sankalpchauhan.positively.config.Constants.USER;
 
 public class SignUpActivity extends AppCompatActivity {
 //    private boolean isUserAnonymous=false;

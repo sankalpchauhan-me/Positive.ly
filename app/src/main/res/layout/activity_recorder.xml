@@ -50,6 +50,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
         android:src="@drawable/ic_add_black_24dp"
+        android:transitionName="@string/record_fab_transition"
         />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

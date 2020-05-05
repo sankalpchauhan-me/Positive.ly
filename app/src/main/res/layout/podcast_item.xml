@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp">
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_container"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <include layout="@layout/shimmer_placeholder" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main_cardview"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:elevation="2dp"
+        shimmer:cardCornerRadius="4dp"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/podcast_thumbnail"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@mipmap/ic_launcher"
+            android:transitionName="sharedThumbnail"
+            android:foreground="@drawable/image_overlay"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="66dp"
+            android:layout_gravity="center|bottom">
+
+            <ImageView
+                android:id="@+id/textBackDrop"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/image_overlay" />
+
+            <TextView
+                android:id="@+id/podcast_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center|bottom"
+                android:layout_marginBottom="20dp"
+                android:text="Podcast title"
+                android:textAlignment="center"
+                android:maxLines="2"
+                android:ellipsize="end"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold|italic" />
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>
