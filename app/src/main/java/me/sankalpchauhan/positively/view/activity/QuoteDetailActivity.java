@@ -3,8 +3,10 @@ package me.sankalpchauhan.positively.view.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +25,8 @@ import butterknife.ButterKnife;
 import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.config.Constants;
 import me.sankalpchauhan.positively.service.model.Quotes;
+import me.sankalpchauhan.positively.service.repository.QuotesRepository;
+import timber.log.Timber;
 
 public class QuoteDetailActivity extends AppCompatActivity {
     @BindView(R.id.adView)
@@ -76,6 +80,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
+
     }
 
     @Override

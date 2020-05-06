@@ -67,7 +67,7 @@
     <string name="check_email">Check Email</string>
     <string name="link_sent_message">A link has been sent to your email account, you can use that to sign in</string>
     <string name="email_not_verified">Email is not verified</string>
-    <string name="something_went_wrong">Something Went Wrong...</string>
+    <string name="something_went_wrong">Something Went Wrong…</string>
     <string name="click_here_to_log_in">Click to Log In/Sign Up</string>
     <string name="user_plain_text">User</string>
     <string name="sign_out">Sign Out</string>
@@ -83,4 +83,7 @@
     <string name="email_not_valid">Email Not Valid</string>
     <string name="passwords_do_not_match">Passwords Do Not Match</string>
     <string name="check_internet_before_playing_audio">Internet Connection needed to stream the audio. Please Check your Network Connection</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="random_quote_initializer">Random quote will appear here, once the app is re-started</string>
 </resources>

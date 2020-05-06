@@ -9,6 +9,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
+import java.util.Random;
 
 import me.sankalpchauhan.positively.config.Constants;
 import me.sankalpchauhan.positively.service.model.Quotes;
@@ -75,4 +76,12 @@ public class QuotesRepository {
 
         return quotesImageUrl;
     }
+
+
+    //Gets Quote Of The Day for the service since it is not a good idea to use ViewModel with service as service dosen't have a lifecycle
+    // So we will directly inject Repository in the service and use observeForever
+    public QuotesAPI getQuoteOfTheDay(){
+        return quotesAPI;
+    }
+
 }

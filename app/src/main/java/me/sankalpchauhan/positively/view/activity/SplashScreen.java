@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import me.sankalpchauhan.positively.R;
+import me.sankalpchauhan.positively.WidgetUpdateService;
 import me.sankalpchauhan.positively.config.DefaultPrefSettings;
 import me.sankalpchauhan.positively.service.model.User;
 import me.sankalpchauhan.positively.viewmodel.LoginViewModel;
@@ -24,6 +25,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         initSplashViewModel();
         checkIfUserIsAuthenticated();
+        startService(new Intent(this, WidgetUpdateService.class));
     }
 
     private void initSplashViewModel() {
