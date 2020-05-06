@@ -20,17 +20,17 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:elevation="2dp"
-        shimmer:cardCornerRadius="4dp"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        shimmer:cardCornerRadius="4dp">
 
         <ImageView
             android:id="@+id/podcast_thumbnail"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@mipmap/ic_launcher"
-            android:transitionName="sharedThumbnail"
             android:contentDescription="@string/podcast_thumbnail_image"
-            android:foreground="@drawable/image_overlay"/>
+            android:foreground="@drawable/image_overlay"
+            android:src="@mipmap/ic_launcher"
+            android:transitionName="sharedThumbnail" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -50,10 +50,10 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center|bottom"
                 android:layout_marginBottom="20dp"
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:text="@string/podcast_title"
                 android:textAlignment="center"
-                android:maxLines="2"
-                android:ellipsize="end"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold|italic" />

@@ -10,12 +10,11 @@
 
     <item
         android:id="@+id/navigation_record"
-        android:title=""
         android:checkable="false"
         android:checked="false"
-        app:showAsAction="always"
         android:enabled="false"
-        />
+        android:title=""
+        app:showAsAction="always" />
 
     <item
         android:id="@+id/navigation_quotes"

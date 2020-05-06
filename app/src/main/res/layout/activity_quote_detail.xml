@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.QuoteDetailActivity"
-    android:background="@drawable/image_overlay_dark">
+    android:background="@drawable/image_overlay_dark"
+    tools:context=".view.activity.QuoteDetailActivity">
 
     <include layout="@layout/app_bar" />
 
@@ -17,22 +17,22 @@
         android:layout_marginBottom="?actionBarSize">
 
         <ImageView
-            android:transitionName="@string/shared_thumbnail"
             android:id="@+id/quote_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:contentDescription="@string/quote_full_size_image_background"
             android:foreground="@drawable/image_overlay_dark"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher"
-            android:contentDescription="@string/quote_full_size_image_background"
-            android:layout_margin="4dp"/>
+            android:transitionName="@string/shared_thumbnail" />
 
         <TextView
-            android:layout_margin="4dp"
             android:id="@+id/quote_actual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_margin="4dp"
             android:layout_marginBottom="20dp"
             android:text="@string/quote_title_sample"
             android:textAlignment="center"
@@ -50,24 +50,24 @@
             android:textSize="24sp"
             android:textStyle="bold|italic" />
     </RelativeLayout>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/share_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:src="@drawable/ic_share_black_24dp"
-        android:layout_gravity="bottom|end"/>
-    <com.google.android.gms.ads.AdView
-        android:layout_gravity="bottom"
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:src="@drawable/ic_share_black_24dp" />
+
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/BANNER_AD_ID">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/BANNER_AD_ID"></com.google.android.gms.ads.AdView>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

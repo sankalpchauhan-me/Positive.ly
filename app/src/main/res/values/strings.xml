@@ -92,4 +92,8 @@
     <string name="no_server_response">Oops! No Response from Sever, Please try restarting the app.</string>
     <string name="press_back_again">Please click BACK again to exit</string>
     <string name="check_network_main">Please Check Your Network Connection</string>
+    <string name="show_all_quotes">Show All Quotes</string>
+    <string name="show_only_favorite_quotes">Show Favorite Quotes</string>
+    <string name="no_favorites_selected">No Favorites Selected</string>
+    <string name="user_fav_quotes">Favourite Quotes</string>
 </resources>

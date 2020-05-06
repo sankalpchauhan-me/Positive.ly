@@ -3,11 +3,14 @@ package me.sankalpchauhan.positively.view.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -24,8 +27,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.config.Constants;
+import me.sankalpchauhan.positively.database.AppDatabase;
 import me.sankalpchauhan.positively.service.model.Quotes;
 import me.sankalpchauhan.positively.service.repository.QuotesRepository;
+import me.sankalpchauhan.positively.utils.AppExecutors;
 import timber.log.Timber;
 
 public class QuoteDetailActivity extends AppCompatActivity {
@@ -43,6 +48,9 @@ public class QuoteDetailActivity extends AppCompatActivity {
     TextView quoteAuthour;
     Quotes quotes;
     String imageUrl;
+    private Menu menu;
+    private MutableLiveData<Boolean> isFav = new MutableLiveData<>();
+    private AppDatabase roomDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +62,14 @@ public class QuoteDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quote_detail);
         ButterKnife.bind(this);
+        roomDB = AppDatabase.getInstance(getApplicationContext());
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         toolbar.setTitle(getResources().getString(R.string.positive_ly_quote_title));
+        isFav.setValue(false);
+        invalidateOptionsMenu();
         Picasso.get().load(imageUrl).into(quoteImage);
         quoteText.setText(quotes.getText());
         if (quotes.getAuthor() != null) {
@@ -77,6 +88,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share_using)));
             }
         });
+        isQuoteFavorite();
 
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
@@ -89,7 +101,64 @@ public class QuoteDetailActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.fav_icon:
+                saveDataToRoom();
+                return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void saveDataToRoom() {
+        final Quotes q = new Quotes(quotes.getText(), quotes.getAuthor(), imageUrl);
+        if (!isFav.getValue()) {
+            Timber.e("I am here1");
+            AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                @Override
+                public void run() {
+                    roomDB.quotesDao().InsertQuoteToRoom(q);
+                }
+            });
+        } else {
+            Timber.e("I am here2");
+            isFav.setValue(false);
+            AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                @Override
+                public void run() {
+                    roomDB.quotesDao().deleteQuoteById(quotes.getText(), imageUrl);
+                }
+            });
+        }
+
+
+    }
+
+    private void isQuoteFavorite() {
+        roomDB.quotesDao().getCurrentQuoteById(quotes.getText(), imageUrl).observe(QuoteDetailActivity.this, new Observer<Quotes>() {
+            @Override
+            public void onChanged(Quotes q) {
+                if (q != null) {
+                    if (q.getText().equals(quotes.getText())) {
+                        isFav.setValue(true);
+                        invalidateOptionsMenu();
+                    }
+                }
+            }
+        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        this.menu = menu;
+        getMenuInflater().inflate(R.menu.quotes_detail_menu, menu);
+        isFav.observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                menu.getItem(0).setIcon(ContextCompat.getDrawable(QuoteDetailActivity.this, R.drawable.ic_star_border_black_24dp));
+                if (aBoolean.equals(true)) {
+                    menu.getItem(0).setIcon(ContextCompat.getDrawable(QuoteDetailActivity.this, R.drawable.ic_star_black_24dp));
+                }
+            }
+        });
+        return true;
     }
 }

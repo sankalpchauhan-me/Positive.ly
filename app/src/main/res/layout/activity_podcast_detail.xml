@@ -23,8 +23,8 @@
                 android:id="@+id/podcast_image"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="@string/podcast_backdrop_image"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/podcast_backdrop_image"
                 android:foreground="@drawable/image_overlay_dark"
                 android:scaleType="centerCrop"
                 android:src="@drawable/image_overlay"
@@ -67,17 +67,17 @@
                         android:id="@+id/podcast_thumbnail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/logo"
-                        android:contentDescription="@string/podcast_thumbnail_image"/>
+                        android:contentDescription="@string/podcast_thumbnail_image"
+                        android:src="@drawable/logo" />
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/podcast_play"
                         android:layout_width="wrap_content"
-                        android:transitionName="@string/podcast_share_view"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentBottom="true"
-                        android:src="@drawable/ic_play_arrow_black_24dp" />
+                        android:src="@drawable/ic_play_arrow_black_24dp"
+                        android:transitionName="@string/podcast_share_view" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -117,9 +117,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:animateLayoutChanges="true"
                 android:fontFamily="casual"
                 android:maxLines="8"
-                android:animateLayoutChanges="true"
                 android:text="@string/sample_text_podcast_detail"
                 android:textColor="@color/black" />
 
@@ -167,18 +167,17 @@
                 android:fontFamily="casual"
                 android:text="@string/date_sample"
                 android:textColor="@color/black" />
-            <com.google.android.gms.ads.AdView
-                android:layout_gravity="bottom"
-                xmlns:ads="http://schemas.android.com/apk/res-auto"
-                android:layout_marginTop="30dp"
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/adView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="30dp"
                 ads:adSize="BANNER"
-                ads:adUnitId="@string/BANNER_AD_ID">
-            </com.google.android.gms.ads.AdView>
+                ads:adUnitId="@string/BANNER_AD_ID"></com.google.android.gms.ads.AdView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="wrap_content"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="4dp">
+
     <View
         android:id="@+id/poster"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
         android:background="@color/background"
-        />
+        android:scaleType="centerCrop" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,20 +20,20 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="66dp"
-            android:src="@drawable/image_overlay"/>
+            android:src="@drawable/image_overlay" />
+
         <View
             android:id="@+id/errorMessage"
             android:layout_width="100dp"
             android:layout_height="30dp"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:background="@color/background"
             android:layout_centerInParent="true"
-            android:text="@string/podcast_title"
-            android:visibility="visible"
-            android:textColor="@color/white"
             android:layout_marginBottom="36dp"
-            />
+            android:background="@color/background"
+            android:text="@string/podcast_title"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
     </RelativeLayout>
 
 

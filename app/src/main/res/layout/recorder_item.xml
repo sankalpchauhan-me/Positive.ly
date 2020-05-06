@@ -9,8 +9,8 @@
         android:id="@+id/play_pause"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:src="@drawable/ic_play_arrow_accent_24dp"
-        android:contentDescription="@string/play_button"/>
+        android:contentDescription="@string/play_button"
+        android:src="@drawable/ic_play_arrow_accent_24dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -39,10 +39,10 @@
 
 
     <View
-        android:layout_marginTop="16dp"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_below="@id/play_pause"
-        android:background="@color/colorPrimaryDark"/>
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimaryDark" />
 
 </RelativeLayout>

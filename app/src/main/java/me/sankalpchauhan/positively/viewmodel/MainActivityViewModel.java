@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
 
+import me.sankalpchauhan.positively.database.AppDatabase;
 import me.sankalpchauhan.positively.service.model.Podcast;
 import me.sankalpchauhan.positively.service.model.Quotes;
 import me.sankalpchauhan.positively.service.model.ServerResult;
@@ -19,11 +20,14 @@ public class MainActivityViewModel extends AndroidViewModel {
     private MutableLiveData<List<Quotes>> quoteListMutableLiveData;
     private MutableLiveData<List<String>> quotesImageUrlsMutableLiveData;
     private MutableLiveData<ServerResult> mutableLiveData;
+    private LiveData<List<Quotes>> favQuotes;
     private PodcastRepository podcastRepository;
     private QuotesRepository quotesRepository;
 
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
+        AppDatabase database = AppDatabase.getInstance(this.getApplication());
+        favQuotes = database.quotesDao().getAllFavQuotes();
     }
 
     public void init() {
@@ -47,6 +51,10 @@ public class MainActivityViewModel extends AndroidViewModel {
 
     public LiveData<ServerResult> getPositivityPodcasts() {
         return mutableLiveData;
+    }
+
+    public LiveData<List<Quotes>> getFavQuotes() {
+        return favQuotes;
     }
 
 

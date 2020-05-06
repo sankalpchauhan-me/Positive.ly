@@ -2,10 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/login_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.LoginActivity"
-    android:id="@+id/login_parent">
+    tools:context=".view.activity.LoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -15,14 +15,14 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@string/positive_ly_logo"
         android:src="@drawable/logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.208"
-        android:contentDescription="@string/positive_ly_logo"/>
+        app:layout_constraintVertical_bias="0.208" />
 
     <TextView
         android:id="@+id/textView"
@@ -88,25 +88,25 @@
         android:id="@+id/continue_with_other"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/button_background"
+        android:drawableStart="@drawable/ic_account_circle_black_24dp"
+        android:drawableEnd="@drawable/ic_new_google_favicon"
+        android:drawablePadding="2dip"
+        android:foregroundTint="@color/white"
+        android:gravity="center"
+        android:paddingStart="100dip"
+        android:paddingEnd="100dip"
         android:text="@string/continue_with"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editText"
-        app:layout_constraintVertical_bias="0.882"
-        android:foregroundTint="@color/white"
-        android:drawableEnd="@drawable/ic_new_google_favicon"
-        android:drawablePadding="2dip"
-        android:paddingStart="100dip"
-        android:paddingEnd="100dip"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:drawableStart="@drawable/ic_account_circle_black_24dp"/>
+        app:layout_constraintVertical_bias="0.882" />
 
     <Button
         android:id="@+id/skip_do_anonymous_sign_in"

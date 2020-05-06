@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:shimmer="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent_activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.activity.MainActivity"
-    android:id="@+id/parent_activity_main"
-    xmlns:shimmer="http://schemas.android.com/apk/res-auto">
+    tools:context=".view.activity.MainActivity">
 
     <include
         android:id="@+id/include"
         layout="@layout/app_bar" />
+
     <FrameLayout
         android:id="@+id/activity_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?actionBarSize"
-        android:layout_marginBottom="?actionBarSize">
-    </FrameLayout>
+        android:layout_marginBottom="?actionBarSize"></FrameLayout>
+
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,14 +75,14 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/bottom_bar"
-        android:clickable="false"
-        app:fabAlignmentMode="center"
         android:layout_gravity="bottom"
-        app:menu="@menu/bottom_navigation"
-        android:visibility="invisible"/>
+        android:clickable="false"
+        android:visibility="invisible"
+        app:fabAlignmentMode="center"
+        app:menu="@menu/bottom_navigation" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -94,18 +95,16 @@
             android:layout_height="wrap_content"
             app:itemIconTint="@color/bottom_nav_color"
             app:itemTextColor="@color/bottom_nav_color"
-            app:menu="@menu/bottom_navigation"
-            />
+            app:menu="@menu/bottom_navigation" />
     </FrameLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/record_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:transitionName="@string/record_fab_transition"
         android:src="@drawable/ic_mic_black_24dp"
-        app:layout_anchor="@id/bottom_bar"/>
-
+        android:transitionName="@string/record_fab_transition"
+        app:layout_anchor="@id/bottom_bar" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -381,4 +382,24 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
             }
         }, 4000);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.show_fav_quotes:
+                Intent i = new Intent(MainActivity.this,FavoriteQuotesActivity.class);
+                startActivity(i);
+                overridePendingTransition(R.anim.bottom_up, R.anim.nothing);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_activity_menu, menu);
+        return true;
+    }
+
+
 }

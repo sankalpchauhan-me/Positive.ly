@@ -20,18 +20,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="2dp"
-        shimmer:cardCornerRadius="4dp"
-        android:visibility="invisible">
+        android:visibility="invisible"
+        shimmer:cardCornerRadius="4dp">
 
         <ImageView
-            android:transitionName="@string/shared_thumbnail"
             android:id="@+id/quote_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher"
-            android:scaleType="centerCrop"
             android:contentDescription="@string/quote_image"
-            android:foreground="@drawable/image_overlay_dark"/>
+            android:foreground="@drawable/image_overlay_dark"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/ic_launcher"
+            android:transitionName="@string/shared_thumbnail" />
 
         <RelativeLayout
             android:layout_width="match_parent"
