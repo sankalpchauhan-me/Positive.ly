@@ -14,6 +14,9 @@ public class Constants {
     public static final String PODCAST_DATA = "podcast_data";
     public static final String PLAY_BACK_POSITION = "playBackPosition";
     public static final String PLAY_WHEN_READY = "playWhenReady";
+    public static final String QUOTES_IMAGES_COLLECTION_REFERENCE = "quotes_images";
+    public static final String QUOTES_IMAGES_DOCUMENT_REFERENCE = "quotesImages";
+    public static final String IMAGE_ARRAY = "imageArray";
     //max number of retries before fail
     public static final int maxLimit = 3;
     // wait for 5 second before retrying network request

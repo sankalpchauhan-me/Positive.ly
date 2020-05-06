@@ -285,7 +285,7 @@ public class PodcastPlaybackActivity extends AppCompatActivity implements Player
             mExoPlayer = null;
         }
     }
-    
+
 
     @Override
     public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {

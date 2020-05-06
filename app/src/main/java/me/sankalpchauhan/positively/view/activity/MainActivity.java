@@ -49,15 +49,17 @@ import butterknife.ButterKnife;
 import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.config.DefaultPrefSettings;
 import me.sankalpchauhan.positively.service.model.Podcast;
+import me.sankalpchauhan.positively.service.model.Quotes;
 import me.sankalpchauhan.positively.service.model.ServerResult;
 import me.sankalpchauhan.positively.view.fragments.PodcastFragment;
+import me.sankalpchauhan.positively.view.fragments.QuotesFragment;
 import me.sankalpchauhan.positively.viewmodel.MainActivityViewModel;
 import timber.log.Timber;
 
 import static me.sankalpchauhan.positively.config.Constants.SERVER_DATA;
 import static me.sankalpchauhan.positively.utils.utility.setSnackBar;
 
-public class MainActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener, BottomNavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener, BottomNavigationView.OnNavigationItemSelectedListener {
     List<Podcast> podcastList = new ArrayList<>();
     MainActivityViewModel mainActivityViewModel;
     @BindView(R.id.record_fab)
@@ -74,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
     private String appVersionName;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private GoogleSignInClient googleSignInClient;
+    private List<Quotes> quotesList = new ArrayList<>();
+    private List<String> quotesImageUrlList = new ArrayList<>();
+    private static boolean isPodcast = true;
 
     public static FirebaseUser isAuthenticated() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -118,13 +123,18 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
             public void onClick(View view) {
                 Intent i = new Intent(MainActivity.this, RecorderActivity.class);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
-                        makeSceneTransitionAnimation(MainActivity.this, (View)recordFab, getResources().getString(R.string.record_fab_transition));
+                        makeSceneTransitionAnimation(MainActivity.this, (View) recordFab, getResources().getString(R.string.record_fab_transition));
                 startActivity(i, options.toBundle());
             }
         });
+
+        if(savedInstanceState!=null){
+            isPodcast = savedInstanceState.getBoolean("SAVE_BUNDLE_MAIN");
+            Timber.e("Value of podcast: "+ isPodcast);
+        }
     }
 
-    private void initViewModel(){
+    private void initViewModel() {
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
         mainActivityViewModel.init();
         mainActivityViewModel.getPositivityPodcasts().observe(this, new Observer<ServerResult>() {
@@ -133,20 +143,44 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                 shimmerFrameLayout.stopShimmer();
                 shimmerFrameLayout.setVisibility(View.GONE);
                 //TODO: HIDE SHIMMER
-                if(serverResult!=null){
+                if (serverResult != null) {
                     List<Podcast> fetchedPodcastList = serverResult.getPodcasts();
                     podcastList.addAll(fetchedPodcastList);
                     PodcastFragment podcastFragment = new PodcastFragment();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable(SERVER_DATA, serverResult);
                     loadFragment(podcastFragment);
-                    for(Podcast podcast: podcastList){
-                        Timber.e("Podcast List: "+podcast.getTitleOriginal());
+                    for (Podcast podcast : podcastList) {
+                        Timber.e("Podcast List: " + podcast.getTitleOriginal());
                     }
                     //TODO: HIDE EMPTY STATE
-                } else{
+                } else {
                     Toast.makeText(MainActivity.this, "Something Went Wrong...", Toast.LENGTH_SHORT).show();
                     //TODO: SHOW EMPTY STATE
+                }
+            }
+        });
+        mainActivityViewModel.getQuoteList().observe(this, new Observer<List<Quotes>>() {
+            @Override
+            public void onChanged(List<Quotes> quotes) {
+                if (quotes != null) {
+                    quotesList.addAll(quotes);
+                    if(!isPodcast){
+                        loadFragment(new QuotesFragment());
+                        toolbar.setTitle(getResources().getString(R.string.positively_quotes));
+                    }
+                } else {
+                    Timber.e("Unable to Fetch quotes");
+                }
+            }
+        });
+        mainActivityViewModel.getQuotesImageUrl().observe(this, new Observer<List<String>>() {
+            @Override
+            public void onChanged(List<String> strings) {
+                if (strings != null) {
+                    quotesImageUrlList.addAll(strings);
+                } else {
+                    Timber.e("Unable to Fetch Image Urls");
                 }
             }
         });
@@ -156,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         String email, name;
         if (isAuthenticated() != null && !DefaultPrefSettings.getInstance().isUserAnonymous()) {
             email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-            if(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()==null || FirebaseAuth.getInstance().getCurrentUser().getDisplayName().isEmpty()) {
+            if (FirebaseAuth.getInstance().getCurrentUser().getDisplayName() == null || FirebaseAuth.getInstance().getCurrentUser().getDisplayName().isEmpty()) {
                 //Timber.d("I am here 2"+String.valueOf(FirebaseAuth.getInstance().getCurrentUser().getDisplayName()));
                 String[] nameemail = email.split("@");
                 name = nameemail[0];
@@ -273,18 +307,21 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         Fragment fragment = null;
-        switch (menuItem.getItemId()){
+        switch (menuItem.getItemId()) {
             case R.id.navigation_podcast:
                 toolbar.setTitle(getResources().getString(R.string.positively_podcasts));
+                isPodcast=true;
                 fragment = new PodcastFragment();
                 break;
             case R.id.navigation_record:
                 break;
             case R.id.navigation_quotes:
                 toolbar.setTitle(getResources().getString(R.string.positively_quotes));
+                isPodcast=false;
+                fragment = new QuotesFragment();
                 break;
         }
-       return loadFragment(fragment);
+        return loadFragment(fragment);
     }
 
     public boolean loadFragment(Fragment fragment) {
@@ -299,7 +336,21 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         return false;
     }
 
-    public List<Podcast> getPodcastList(){
+    public List<Podcast> getPodcastList() {
         return podcastList;
+    }
+
+    public List<Quotes> getQuotesList() {
+        return quotesList;
+    }
+
+    public List<String> getQuotesImageUrlList() {
+        return quotesImageUrlList;
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("SAVE_BUNDLE_MAIN", isPodcast);
     }
 }
