@@ -10,12 +10,13 @@ import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.config.DefaultPrefSettings;
 import me.sankalpchauhan.positively.service.model.User;
 import me.sankalpchauhan.positively.viewmodel.LoginViewModel;
+import me.sankalpchauhan.positively.viewmodel.SplashViewModel;
 import timber.log.Timber;
 
 import static me.sankalpchauhan.positively.config.Constants.USER;
 
 public class SplashScreen extends AppCompatActivity {
-    private LoginViewModel splashViewModel;
+    private SplashViewModel splashViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,7 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void initSplashViewModel() {
-        splashViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        splashViewModel = new ViewModelProvider(this).get(SplashViewModel.class);
     }
 
     private void checkIfUserIsAuthenticated() {

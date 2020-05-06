@@ -23,6 +23,7 @@ import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.config.DefaultPrefSettings;
 import me.sankalpchauhan.positively.service.model.User;
 import me.sankalpchauhan.positively.viewmodel.LoginViewModel;
+import me.sankalpchauhan.positively.viewmodel.SignUpActualViewModel;
 
 import static me.sankalpchauhan.positively.config.Constants.CREATE_ACCOUNT;
 import static me.sankalpchauhan.positively.config.Constants.NAV_TYPE;
@@ -47,7 +48,7 @@ public class SignUpActualActivity extends AppCompatActivity {
     Button createAccountOrLogin;
     @BindView(R.id.title_text_sign_in_up)
     TextView title;
-    private LoginViewModel authViewModel;
+    private SignUpActualViewModel authViewModel;
     private String type;
 
     @Override
@@ -110,7 +111,7 @@ public class SignUpActualActivity extends AppCompatActivity {
     }
 
     public void initAuthViewModel() {
-        authViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        authViewModel = new ViewModelProvider(this).get(SignUpActualViewModel.class);
     }
 
     private boolean validateSignInForm() {

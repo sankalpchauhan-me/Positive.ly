@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -30,6 +31,8 @@ import butterknife.ButterKnife;
 import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.config.Constants;
 import me.sankalpchauhan.positively.service.model.Podcast;
+
+import static me.sankalpchauhan.positively.utils.utility.isOnline;
 
 public class PodcastDetailActivity extends AppCompatActivity {
     private boolean isTextViewClicked =false;
@@ -113,10 +116,14 @@ public class PodcastDetailActivity extends AppCompatActivity {
         playFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(PodcastDetailActivity.this, PodcastPlaybackActivity.class);
-                i.putExtra(Constants.PODCAST_DATA, podcast);
-                ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(PodcastDetailActivity.this,view, getResources().getString(R.string.podcast_share_view));
-                startActivity(i, option.toBundle());
+                if(isOnline()) {
+                    Intent i = new Intent(PodcastDetailActivity.this, PodcastPlaybackActivity.class);
+                    i.putExtra(Constants.PODCAST_DATA, podcast);
+                    ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(PodcastDetailActivity.this, view, getResources().getString(R.string.podcast_share_view));
+                    startActivity(i, option.toBundle());
+                } else {
+                    Toast.makeText(PodcastDetailActivity.this, getResources().getString(R.string.check_internet_before_playing_audio), Toast.LENGTH_LONG).show();
+                }
             }
         });
         AdRequest adRequest = new AdRequest.Builder().build();

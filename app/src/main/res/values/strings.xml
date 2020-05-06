@@ -82,4 +82,5 @@
     <string name="min_password_length_error">Password should be at least 6 characters</string>
     <string name="email_not_valid">Email Not Valid</string>
     <string name="passwords_do_not_match">Passwords Do Not Match</string>
+    <string name="check_internet_before_playing_audio">Internet Connection needed to stream the audio. Please Check your Network Connection</string>
 </resources>

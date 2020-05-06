@@ -27,6 +27,7 @@ import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.config.DefaultPrefSettings;
 import me.sankalpchauhan.positively.service.model.User;
 import me.sankalpchauhan.positively.viewmodel.LoginViewModel;
+import me.sankalpchauhan.positively.viewmodel.SignUpViewModel;
 import timber.log.Timber;
 
 import static me.sankalpchauhan.positively.config.Constants.CREATE_ACCOUNT;
@@ -38,7 +39,7 @@ import static me.sankalpchauhan.positively.config.Constants.USER;
 public class SignUpActivity extends AppCompatActivity {
 //    private boolean isUserAnonymous=false;
     private GoogleSignInClient googleSignInClient;
-    private LoginViewModel authViewModel;
+    private SignUpViewModel authViewModel;
     @BindView(R.id.up_button)
     ImageButton upImageButton;
     @BindView(R.id.create_new_account)
@@ -97,7 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void initAuthViewModel() {
-        authViewModel = new ViewModelProvider(this).get(LoginViewModel.class);
+        authViewModel = new ViewModelProvider(this).get(SignUpViewModel.class);
     }
 
     @Override

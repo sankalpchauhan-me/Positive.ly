@@ -258,11 +258,6 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                 .build();
     }
 
-    /**
-     * This is not working don't know wht
-     *
-     * @param firebaseAuth
-     */
     @Override
     public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
