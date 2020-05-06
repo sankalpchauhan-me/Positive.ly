@@ -49,10 +49,9 @@ public class WidgetUpdateService extends IntentService {
                     updateWidgetQuote(quote, author);
                 }
             }
-
             @Override
             public void onFailure(Call<List<Quotes>> call, Throwable t) {
-                
+
             }
         });
     }

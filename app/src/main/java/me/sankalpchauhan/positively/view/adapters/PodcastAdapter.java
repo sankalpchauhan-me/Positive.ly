@@ -47,7 +47,6 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastAdapter.PodcastH
 
     @Override
     public void onBindViewHolder(@NonNull PodcastHolder holder, int position) {
-        holder.placeholder.startShimmer();
         Podcast podcast = podcastList.get(position);
         Picasso.get().load(podcast.getThumbnail()).into(new Target() {
             @Override
@@ -60,7 +59,7 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastAdapter.PodcastH
                             public void onGenerated(@Nullable Palette palette) {
                                 Palette.Swatch backdropSwtch = palette.getDarkVibrantSwatch();
                                 if(backdropSwtch==null){
-                                    Timber.e("Test");
+                                    Timber.e("Podcast Adapter: Test");
                                     return;
                                 }
                                 int transparentRGBInt = getColorWithAplha(backdropSwtch.getRgb(), 0.5f);
@@ -79,6 +78,7 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastAdapter.PodcastH
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
                 // It is being handled by shimmer
+                holder.placeholder.startShimmer();
             }
         });
         if (podcast.getTitleOriginal() != null) {

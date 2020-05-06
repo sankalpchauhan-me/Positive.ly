@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,9 +28,14 @@ import me.sankalpchauhan.positively.view.adapters.PodcastAdapter;
 import timber.log.Timber;
 
 import static me.sankalpchauhan.positively.config.Constants.PODCAST_DATA;
+import static me.sankalpchauhan.positively.utils.utility.isOnline;
 
 
 public class PodcastFragment extends Fragment implements PodcastAdapter.PodcastAdapterOnClickHandler {
+    @BindView(R.id.empty_view)
+    TextView errorView;
+    @BindView(R.id.empty_image)
+    ImageView errorImage;
     @BindView(R.id.podcast_rv)
     RecyclerView podcastRv;
     Context context;
@@ -65,6 +71,13 @@ public class PodcastFragment extends Fragment implements PodcastAdapter.PodcastA
         }
 
         Timber.e("Item Couunt: "+podcastAdapter.getItemCount());
+        if(podcastAdapter.getItemCount()==0){
+            errorImage.setVisibility(View.VISIBLE);
+            errorView.setVisibility(View.VISIBLE);
+            if(!isOnline()){
+                errorView.setText(R.string.oops_network_error);
+            }
+        }
 
     }
 

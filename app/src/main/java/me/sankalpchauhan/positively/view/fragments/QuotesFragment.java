@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +30,13 @@ import me.sankalpchauhan.positively.view.activity.QuoteDetailActivity;
 import me.sankalpchauhan.positively.view.adapters.QuotesAdapter;
 import timber.log.Timber;
 
+import static me.sankalpchauhan.positively.utils.utility.isOnline;
+
 public class QuotesFragment extends Fragment implements QuotesAdapter.QuotesAdapterClickHandler {
+    @BindView(R.id.empty_view)
+    TextView errorView;
+    @BindView(R.id.empty_image)
+    ImageView errorImage;
     @BindView(R.id.quotesRv)
     RecyclerView quotesRecycler;
     Context context;
@@ -69,6 +77,13 @@ public class QuotesFragment extends Fragment implements QuotesAdapter.QuotesAdap
         }
 
         Timber.e("Item Couunt: "+quotesAdapter.getItemCount());
+        if(quotesAdapter.getItemCount()==0){
+            errorImage.setVisibility(View.VISIBLE);
+            errorView.setVisibility(View.VISIBLE);
+            if(!isOnline()){
+                errorView.setText(R.string.oops_network_error);
+            }
+        }
 
     }
 
