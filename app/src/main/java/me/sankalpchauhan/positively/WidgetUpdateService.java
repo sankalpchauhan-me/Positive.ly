@@ -19,8 +19,9 @@ import retrofit2.Response;
 import timber.log.Timber;
 
 public class WidgetUpdateService extends IntentService {
-    private PowerManager.WakeLock wakeLock;
     QuotesRepository quotesRepository;
+    private PowerManager.WakeLock wakeLock;
+
     public WidgetUpdateService() {
         super("Positive.ly");
         setIntentRedelivery(true);
@@ -42,13 +43,14 @@ public class WidgetUpdateService extends IntentService {
         quotesRepository.getQuoteOfTheDay().getAllQuotes().enqueue(new Callback<List<Quotes>>() {
             @Override
             public void onResponse(Call<List<Quotes>> call, Response<List<Quotes>> response) {
-                if(response.isSuccessful() && response.code()==200) {
+                if (response.isSuccessful() && response.code() == 200) {
                     int randomQuote = new Random().nextInt(response.body().size());
                     String quote = response.body().get(randomQuote).getText();
                     String author = response.body().get(randomQuote).getAuthor();
                     updateWidgetQuote(quote, author);
                 }
             }
+
             @Override
             public void onFailure(Call<List<Quotes>> call, Throwable t) {
 
@@ -56,15 +58,15 @@ public class WidgetUpdateService extends IntentService {
         });
     }
 
-    private void updateWidgetQuote(String s1, String s2){
-        Timber.d("Task Response"+s1);
+    private void updateWidgetQuote(String s1, String s2) {
+        Timber.d("Task Response" + s1);
         Context context = this;
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
         RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.quote_of_the_day_widget);
         ComponentName thisWidget = new ComponentName(context, QuoteOfTheDayWidget.class);
-        remoteViews.setTextViewText(R.id.quote_tv,s1);
-        if(s2!=null){
-            remoteViews.setTextViewText(R.id.quote_authour, "- "+s2);
+        remoteViews.setTextViewText(R.id.quote_tv, s1);
+        if (s2 != null) {
+            remoteViews.setTextViewText(R.id.quote_authour, "- " + s2);
         }
         appWidgetManager.updateAppWidget(thisWidget, remoteViews);
     }

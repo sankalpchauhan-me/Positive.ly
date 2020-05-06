@@ -15,6 +15,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -59,8 +60,10 @@ import timber.log.Timber;
 import static me.sankalpchauhan.positively.config.Constants.SERVER_DATA;
 import static me.sankalpchauhan.positively.utils.utility.isOnline;
 import static me.sankalpchauhan.positively.utils.utility.setSnackBar;
+import static me.sankalpchauhan.positively.utils.utility.setSnackBarNoAction;
 
 public class MainActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener, BottomNavigationView.OnNavigationItemSelectedListener {
+    private static boolean isPodcast = true;
     List<Podcast> podcastList = new ArrayList<>();
     MainActivityViewModel mainActivityViewModel;
     @BindView(R.id.record_fab)
@@ -73,13 +76,13 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
     BottomNavigationView bottomNavigationView;
     @BindView(R.id.shimmer_view_container)
     ShimmerFrameLayout shimmerFrameLayout;
+    boolean doubleBackToExitPressedOnce = false;
     private int appVersionCode;
     private String appVersionName;
     private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private GoogleSignInClient googleSignInClient;
     private List<Quotes> quotesList = new ArrayList<>();
     private List<String> quotesImageUrlList = new ArrayList<>();
-    private static boolean isPodcast = true;
 
     public static FirebaseUser isAuthenticated() {
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -129,9 +132,9 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
             }
         });
 
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
             isPodcast = savedInstanceState.getBoolean("SAVE_BUNDLE_MAIN");
-            Timber.e("Value of podcast: "+ isPodcast);
+            Timber.e("Value of podcast: " + isPodcast);
         }
     }
 
@@ -166,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
             public void onChanged(List<Quotes> quotes) {
                 if (quotes != null) {
                     quotesList.addAll(quotes);
-                    if(!isPodcast){
+                    if (!isPodcast) {
                         loadFragment(new QuotesFragment());
                         toolbar.setTitle(getResources().getString(R.string.positively_quotes));
                     }
@@ -304,8 +307,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
     @Override
     protected void onResume() {
         super.onResume();
-        if(!isOnline()){
-            Toast.makeText(this, "Please Check Your Network Connection", Toast.LENGTH_SHORT).show();
+        if (!isOnline()) {
+            Toast.makeText(this, getResources().getString(R.string.check_network_main), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -315,14 +318,14 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         switch (menuItem.getItemId()) {
             case R.id.navigation_podcast:
                 toolbar.setTitle(getResources().getString(R.string.positively_podcasts));
-                isPodcast=true;
+                isPodcast = true;
                 fragment = new PodcastFragment();
                 break;
             case R.id.navigation_record:
                 break;
             case R.id.navigation_quotes:
                 toolbar.setTitle(getResources().getString(R.string.positively_quotes));
-                isPodcast=false;
+                isPodcast = false;
                 fragment = new QuotesFragment();
                 break;
         }
@@ -359,9 +362,23 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         outState.putBoolean("SAVE_BUNDLE_MAIN", isPodcast);
     }
 
+    /**
+     * Attribution:
+     * https://stackoverflow.com/questions/8430805/clicking-the-back-button-twice-to-exit-an-activity
+     */
     @Override
     public void onBackPressed() {
-        //finishAndRemoveTask();
-        super.onBackPressed();
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        setSnackBarNoAction(parent, getResources().getString(R.string.press_back_again));
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 4000);
     }
 }

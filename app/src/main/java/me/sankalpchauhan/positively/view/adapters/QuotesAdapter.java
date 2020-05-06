@@ -29,11 +29,11 @@ import timber.log.Timber;
 import static me.sankalpchauhan.positively.PositivelyApp.getAnalyticsInstance;
 
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolder> {
+    private final QuotesAdapterClickHandler mCallback;
     private List<Quotes> quotesList;
     private List<String> imageList;
-    private final QuotesAdapterClickHandler mCallback;
 
-    public QuotesAdapter(QuotesAdapterClickHandler clickHandler){
+    public QuotesAdapter(QuotesAdapterClickHandler clickHandler) {
         mCallback = clickHandler;
     }
 
@@ -50,12 +50,12 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
         holder.placeholder.startShimmer();
         int randomImage;
         int randomQuote;
-        if(imageList.size()!=0) {
+        if (imageList.size() != 0) {
             randomImage = new Random().nextInt(imageList.size());
             randomQuote = new Random().nextInt(imageList.size());
         } else {
             randomQuote = new Random().nextInt(position);
-            randomImage = new Random().nextInt(position%20);
+            randomImage = new Random().nextInt(position % 20);
         }
         Quotes quotes = quotesList.get(randomQuote);
         String imageUrl = imageList.get(randomImage);
@@ -85,7 +85,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
                 b.putString(FirebaseAnalytics.Param.ITEM_NAME, imageUrl);
                 b.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "Status");
                 getAnalyticsInstance().logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, b);
-                Timber.e("Image with error"+imageList.get(randomImage)+" position in database: "+randomImage);
+                Timber.e("Image with error" + imageList.get(randomImage) + " position in database: " + randomImage);
                 e.printStackTrace();
             }
         });
@@ -93,7 +93,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
 
     @Override
     public int getItemCount() {
-        if(quotesList==null){
+        if (quotesList == null) {
             return 0;
         }
         return quotesList.size();
@@ -101,15 +101,15 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
 
     public void setQuoteData(List<Quotes> quoteData, List<String> imageData) {
         quotesList = quoteData;
-        imageList =imageData;
+        imageList = imageData;
         notifyDataSetChanged();
     }
 
-    public interface QuotesAdapterClickHandler{
+    public interface QuotesAdapterClickHandler {
         void onClick(int quotePosition, int imagePosition, View imageView);
     }
 
-    public class QuoteHolder extends RecyclerView.ViewHolder{
+    public class QuoteHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.main_cardview)
         CardView mainCard;
         @BindView(R.id.quote_actual)
@@ -118,6 +118,7 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
         ImageView quoteBackground;
         @BindView(R.id.shimmer_view_container)
         ShimmerFrameLayout placeholder;
+
         public QuoteHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

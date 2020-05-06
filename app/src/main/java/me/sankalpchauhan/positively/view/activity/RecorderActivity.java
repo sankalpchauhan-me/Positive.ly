@@ -56,7 +56,7 @@ public class RecorderActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(RecorderActivity.this, AudioRecordingActivity.class);
-                ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(RecorderActivity.this,view, getResources().getString(R.string.record_fab_transition));
+                ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(RecorderActivity.this, view, getResources().getString(R.string.record_fab_transition));
                 ActivityCompat.startActivity(RecorderActivity.this, intent, option.toBundle());
             }
         });

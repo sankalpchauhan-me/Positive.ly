@@ -70,10 +70,10 @@ public class LoginActivity extends AppCompatActivity {
                 authViewModel.signInAnonymous();
                 authViewModel.anonymousUserLiveData.observe(LoginActivity.this, user -> {
                     if (user != null) {
-                        Timber.e("Test " + user.isAnonymous);
+                        Timber.d("Test " + user.isAnonymous);
                         goToMainActivity(user);
                     } else {
-                        if(isOnline()) {
+                        if (isOnline()) {
                             Toast.makeText(LoginActivity.this, getResources().getString(R.string.Some_Error_Occured), Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(LoginActivity.this, getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
@@ -191,14 +191,14 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Timber.d("Successfully signed in with email link!");
                                 AuthResult result = task.getResult();
-                                FirebaseUser authenticatedUser= result.getUser();
+                                FirebaseUser authenticatedUser = result.getUser();
                                 User user = new User(authenticatedUser.getUid(), authenticatedUser.getDisplayName(), authenticatedUser.getEmail());
                                 authViewModel.createUser(user);
                                 authViewModel.createdUserLiveData.observe(LoginActivity.this, new Observer<User>() {
                                     @Override
                                     public void onChanged(User user) {
                                         continueButton.setVisibility(View.VISIBLE);
-                                        if(user!=null) {
+                                        if (user != null) {
                                             Toast.makeText(LoginActivity.this, getResources().getString(R.string.signed_in), Toast.LENGTH_SHORT).show();
                                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                             finish();
@@ -219,7 +219,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(!isOnline()){
+        if (!isOnline()) {
             setSnackBarNoAction(parent, getResources().getString(R.string.no_internet));
         }
         initDynamicLink();
@@ -289,16 +289,15 @@ public class LoginActivity extends AppCompatActivity {
                                 "21"    /* minimumVersion */)
                         .build();
         DefaultPrefSettings.getInstance().setUserEmail(email);
-        getInstance().sendSignInLinkToEmail(email,actionCodeSettings)
+        getInstance().sendSignInLinkToEmail(email, actionCodeSettings)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         continueButton.setVisibility(View.VISIBLE);
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Timber.d("signInWithEmail:Link send success");
                             updateViewOnSignIn();
-                        }
-                        else {
+                        } else {
                             Timber.e("signInWithEmail:Link send failure", task.getException());
                             Toast.makeText(LoginActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         }

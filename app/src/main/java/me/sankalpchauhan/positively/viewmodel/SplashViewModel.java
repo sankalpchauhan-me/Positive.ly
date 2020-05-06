@@ -10,9 +10,10 @@ import me.sankalpchauhan.positively.service.model.User;
 import me.sankalpchauhan.positively.service.repository.LoginRepository;
 
 public class SplashViewModel extends AndroidViewModel {
-    private LoginRepository authRepository;
     public LiveData<User> isUserAuthenticatedLiveData;
     public LiveData<User> userLiveData;
+    private LoginRepository authRepository;
+
     public SplashViewModel(@NonNull Application application) {
         super(application);
         authRepository = new LoginRepository();

@@ -35,8 +35,6 @@ import me.sankalpchauhan.positively.service.model.Podcast;
 import static me.sankalpchauhan.positively.utils.utility.isOnline;
 
 public class PodcastDetailActivity extends AppCompatActivity {
-    private boolean isTextViewClicked =false;
-    private Podcast podcast;
     @BindView(R.id.adView)
     AdView adView;
     @BindView(R.id.app_bar)
@@ -59,11 +57,20 @@ public class PodcastDetailActivity extends AppCompatActivity {
     TextView podcastPublishDate;
     @BindView(R.id.podcast_click_to_expand)
     ImageButton clickToExpand;
+    private boolean isTextViewClicked = false;
+    private Podcast podcast;
+
+    public static String getDate(long milliSeconds, String dateFormat) {
+        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, Locale.US);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(milliSeconds);
+        return formatter.format(calendar.getTime());
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent catchIntent = getIntent();
-        if(catchIntent.hasExtra(Constants.PODCAST_DATA)){
+        if (catchIntent.hasExtra(Constants.PODCAST_DATA)) {
             podcast = (Podcast) catchIntent.getSerializableExtra(Constants.PODCAST_DATA);
         }
         super.onCreate(savedInstanceState);
@@ -71,26 +78,26 @@ public class PodcastDetailActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setSupportActionBar(podcastDetailToolbar);
         ActionBar bar = getSupportActionBar();
-        if(bar!=null){
+        if (bar != null) {
             bar.setDisplayHomeAsUpEnabled(true);
-            if(podcast.getTitleOriginal()!=null){
+            if (podcast.getTitleOriginal() != null) {
                 bar.setTitle(Html.fromHtml("<font color='#ffffff'><B>" + podcast.getTitleOriginal() + "</B></font>"));
             }
         }
 
-        if(podcast.getDescriptionOriginal()!=null) {
+        if (podcast.getDescriptionOriginal() != null) {
             podcastDescription.setText(podcast.getDescriptionOriginal());
         }
         Picasso.get().load(podcast.getThumbnail()).error(getResources().getDrawable(R.drawable.ic_broken_image_black_24dp)).into(podcastThumbnail);
         Picasso.get().load(podcast.getImage()).into(podcastImage);
-        if(podcast.getPublisherOriginal()!=null){
+        if (podcast.getPublisherOriginal() != null) {
             podcastPublishers.setText(podcast.getPublisherOriginal());
         }
 
         podcastDescription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isTextViewClicked){
+                if (isTextViewClicked) {
                     podcastDescription.setMaxLines(8);
                     isTextViewClicked = false;
                     clickToExpand.setVisibility(View.VISIBLE);
@@ -109,14 +116,14 @@ public class PodcastDetailActivity extends AppCompatActivity {
         });
 
         podcastPublishDate.setText(getDate(podcast.getPubDateMs(), "dd MMMM yyyy"));
-        if(podcast.getAudioLengthSec()!=null){
+        if (podcast.getAudioLengthSec() != null) {
             podcastLength.setText(getHours().toString());
         }
 
         playFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isOnline()) {
+                if (isOnline()) {
                     Intent i = new Intent(PodcastDetailActivity.this, PodcastPlaybackActivity.class);
                     i.putExtra(Constants.PODCAST_DATA, podcast);
                     ActivityOptionsCompat option = ActivityOptionsCompat.makeSceneTransitionAnimation(PodcastDetailActivity.this, view, getResources().getString(R.string.podcast_share_view));
@@ -130,20 +137,12 @@ public class PodcastDetailActivity extends AppCompatActivity {
         adView.loadAd(adRequest);
     }
 
-    public static String getDate(long milliSeconds, String dateFormat)
-    {
-        SimpleDateFormat formatter = new SimpleDateFormat(dateFormat, Locale.US);
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(milliSeconds);
-        return formatter.format(calendar.getTime());
-    }
-
-    public StringBuilder getHours(){
+    public StringBuilder getHours() {
         StringBuilder sb = new StringBuilder();
-        double minutes = (double)podcast.getAudioLengthSec()/60;
-        int hours  =(int) minutes/60;
-        int actualMinutes = (int)minutes-(hours*60);
-        if(hours!=0) {
+        double minutes = (double) podcast.getAudioLengthSec() / 60;
+        int hours = (int) minutes / 60;
+        int actualMinutes = (int) minutes - (hours * 60);
+        if (hours != 0) {
             return sb.append(hours).append("h ").append(actualMinutes).append(" minutes");
         } else {
             return sb.append(actualMinutes).append(" minutes");

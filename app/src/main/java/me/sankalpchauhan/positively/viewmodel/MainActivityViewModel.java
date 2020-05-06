@@ -21,30 +21,31 @@ public class MainActivityViewModel extends AndroidViewModel {
     private MutableLiveData<ServerResult> mutableLiveData;
     private PodcastRepository podcastRepository;
     private QuotesRepository quotesRepository;
+
     public MainActivityViewModel(@NonNull Application application) {
         super(application);
     }
 
-    public void init(){
-        if(mutableLiveData!=null){
+    public void init() {
+        if (mutableLiveData != null) {
             return;
         }
         podcastRepository = podcastRepository.getInstance();
-        mutableLiveData = podcastRepository.getPodcasts("positivity",0,"English",1);
+        mutableLiveData = podcastRepository.getPodcasts("positivity", 0, "English", 1);
         quotesRepository = quotesRepository.getInstance();
     }
 
-    public LiveData<List<Quotes>> getQuoteList(){
+    public LiveData<List<Quotes>> getQuoteList() {
         quoteListMutableLiveData = quotesRepository.getQuotes();
         return quoteListMutableLiveData;
     }
 
-    public LiveData<List<String>> getQuotesImageUrl(){
+    public LiveData<List<String>> getQuotesImageUrl() {
         quotesImageUrlsMutableLiveData = quotesRepository.quotesImageUrls();
         return quotesImageUrlsMutableLiveData;
     }
 
-    public LiveData<ServerResult> getPositivityPodcasts(){
+    public LiveData<ServerResult> getPositivityPodcasts() {
         return mutableLiveData;
     }
 

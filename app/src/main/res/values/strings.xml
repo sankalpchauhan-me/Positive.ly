@@ -90,4 +90,6 @@
     <string name="no_internet">No Internet</string>
     <string name="listennotes_requirement">Powered By ListenNotes API</string>
     <string name="no_server_response">Oops! No Response from Sever, Please try restarting the app.</string>
+    <string name="press_back_again">Please click BACK again to exit</string>
+    <string name="check_network_main">Please Check Your Network Connection</string>
 </resources>

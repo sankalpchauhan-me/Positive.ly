@@ -148,7 +148,7 @@ public class AudioRecordingActivity extends AppCompatActivity implements MediaPl
         mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
         File root = android.os.Environment.getExternalStorageDirectory();
         File file = new File(root.getAbsolutePath() + RECORDING_PATH);
-        Timber.e(file.getAbsoluteFile().toString());
+        Timber.d(file.getAbsoluteFile().toString());
         if (!file.exists()) {
             Timber.d("I am here 4");
             boolean mkdirs = file.mkdirs();

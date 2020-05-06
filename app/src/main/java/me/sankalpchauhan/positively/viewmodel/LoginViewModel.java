@@ -13,9 +13,9 @@ import me.sankalpchauhan.positively.service.model.User;
 import me.sankalpchauhan.positively.service.repository.LoginRepository;
 
 public class LoginViewModel extends AndroidViewModel {
-    private LoginRepository authRepository;
     public LiveData<User> createdUserLiveData;
     public LiveData<User> anonymousUserLiveData;
+    private LoginRepository authRepository;
 
     public LoginViewModel(Application application) {
         super(application);
@@ -26,7 +26,7 @@ public class LoginViewModel extends AndroidViewModel {
         createdUserLiveData = authRepository.createUserInFirestoreIfNotExists(authenticatedUser);
     }
 
-    public void signInAnonymous(){
+    public void signInAnonymous() {
         anonymousUserLiveData = authRepository.anonymousSignIn();
     }
 

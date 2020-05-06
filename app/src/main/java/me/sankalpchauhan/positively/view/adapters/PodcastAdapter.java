@@ -33,7 +33,7 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastAdapter.PodcastH
     private final PodcastAdapterOnClickHandler mCallback;
     List<Podcast> podcastList = new ArrayList<>();
 
-    public PodcastAdapter(PodcastAdapterOnClickHandler mCallback){
+    public PodcastAdapter(PodcastAdapterOnClickHandler mCallback) {
         this.mCallback = mCallback;
     }
 
@@ -58,8 +58,8 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastAdapter.PodcastH
                             @Override
                             public void onGenerated(@Nullable Palette palette) {
                                 Palette.Swatch backdropSwtch = palette.getDarkVibrantSwatch();
-                                if(backdropSwtch==null){
-                                    Timber.e("Podcast Adapter: Test");
+                                if (backdropSwtch == null) {
+                                    Timber.d("Podcast Adapter: Test");
                                     setViewsVisible(holder);
                                     return;
                                 }
@@ -88,7 +88,7 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastAdapter.PodcastH
 
     }
 
-    public void setViewsVisible(PodcastHolder holder){
+    public void setViewsVisible(PodcastHolder holder) {
         holder.placeholder.stopShimmer();
         holder.placeholder.setVisibility(View.GONE);
         holder.mainCardview.setVisibility(View.VISIBLE);
@@ -97,19 +97,19 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastAdapter.PodcastH
     /**
      * Attribution: getColorWithApha()
      * https://stackoverflow.com/questions/36078861/palette-library-how-to-add-transparency-to-palette-swatch-color
+     *
      * @param color opaque RGB integer color for ex: -11517920
      * @param ratio ratio of transparency for ex: 0.5f
      * @return transparent RGB integer color
      */
-    private int getColorWithAplha(int color, float ratio)
-    {
+    private int getColorWithAplha(int color, float ratio) {
         int transColor = 0;
         int alpha = Math.round(Color.alpha(color) * ratio);
         int r = Color.red(color);
         int g = Color.green(color);
         int b = Color.blue(color);
         transColor = Color.argb(alpha, r, g, b);
-        return transColor ;
+        return transColor;
     }
 
     @Override
@@ -125,7 +125,7 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastAdapter.PodcastH
         notifyDataSetChanged();
     }
 
-    public interface PodcastAdapterOnClickHandler{
+    public interface PodcastAdapterOnClickHandler {
         void onClick(Podcast podcast, ImageView imageView);
     }
 

@@ -60,7 +60,7 @@ public class PodcastFragment extends Fragment implements PodcastAdapter.PodcastA
     }
 
     private void setUpRecyclerView() {
-        Timber.e("I am here");
+        Timber.d("I am here");
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, isTabletOrLandscape(), RecyclerView.VERTICAL, false);
         podcastRv.setLayoutManager(gridLayoutManager);
         podcastRv.setHasFixedSize(true);
@@ -70,11 +70,11 @@ public class PodcastFragment extends Fragment implements PodcastAdapter.PodcastA
             podcastAdapter.setPodcastData(((MainActivity) getActivity()).getPodcastList());
         }
 
-        Timber.e("Item Couunt: "+podcastAdapter.getItemCount());
-        if(podcastAdapter.getItemCount()==0){
+        Timber.d("Item Couunt: " + podcastAdapter.getItemCount());
+        if (podcastAdapter.getItemCount() == 0) {
             errorImage.setVisibility(View.VISIBLE);
             errorView.setVisibility(View.VISIBLE);
-            if(!isOnline()){
+            if (!isOnline()) {
                 errorView.setText(R.string.oops_network_error);
             }
         }
@@ -96,7 +96,7 @@ public class PodcastFragment extends Fragment implements PodcastAdapter.PodcastA
         Intent i = new Intent(getActivity(), PodcastDetailActivity.class);
         i.putExtra(PODCAST_DATA, podcast);
         ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(getActivity(), (View)imageView, imageView.getResources().getString(R.string.shared_thumbnail));
+                makeSceneTransitionAnimation(getActivity(), (View) imageView, imageView.getResources().getString(R.string.shared_thumbnail));
         startActivity(i, options.toBundle());
     }
 }

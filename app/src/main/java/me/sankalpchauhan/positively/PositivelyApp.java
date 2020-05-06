@@ -13,12 +13,17 @@ public class PositivelyApp extends Application {
     private static PositivelyApp instance;
     private static FirebaseAnalytics mFirebaseAnalytics;
 
-    public static PositivelyApp getInstance(){
+    public static PositivelyApp getInstance() {
         return instance;
     }
 
-    public static Context getContext(){
+    public static Context getContext() {
         return instance;
+    }
+
+    //Only Single Instance
+    public static FirebaseAnalytics getAnalyticsInstance() {
+        return mFirebaseAnalytics;
     }
 
     @Override
@@ -32,10 +37,5 @@ public class PositivelyApp extends Application {
         DefaultPrefSettings.init(this);
         MobileAds.initialize(this);
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-    }
-
-    //Only Single Instance
-    public static FirebaseAnalytics getAnalyticsInstance(){
-        return mFirebaseAnalytics;
     }
 }

@@ -38,9 +38,6 @@ import static me.sankalpchauhan.positively.config.Constants.SIGN_IN;
 import static me.sankalpchauhan.positively.config.Constants.USER;
 
 public class SignUpActivity extends AppCompatActivity {
-//    private boolean isUserAnonymous=false;
-    private GoogleSignInClient googleSignInClient;
-    private SignUpViewModel authViewModel;
     @BindView(R.id.up_button)
     ImageButton upImageButton;
     @BindView(R.id.create_new_account)
@@ -51,6 +48,9 @@ public class SignUpActivity extends AppCompatActivity {
     Button signInGoogle;
     @BindView(R.id.linearLayout)
     LinearLayout linearLayout;
+    //    private boolean isUserAnonymous=false;
+    private GoogleSignInClient googleSignInClient;
+    private SignUpViewModel authViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,8 +130,8 @@ public class SignUpActivity extends AppCompatActivity {
     private void signInWithGoogleAuthCredential(AuthCredential googleAuthCredential) {
         authViewModel.signInWithGoogle(googleAuthCredential);
         authViewModel.authenticatedUserLiveData.observe(this, authenticatedUser -> {
-            if(authenticatedUser!=null) {
-                if(DefaultPrefSettings.getInstance().isUserAnonymous()){
+            if (authenticatedUser != null) {
+                if (DefaultPrefSettings.getInstance().isUserAnonymous()) {
                     authViewModel.linkCredential(googleAuthCredential);
                     authenticatedUser.isNew = true;
                 }
@@ -181,6 +181,6 @@ public class SignUpActivity extends AppCompatActivity {
                 .requestEmail()
                 .build();
 
-        googleSignInClient =  GoogleSignIn.getClient(this, googleSignInOptions);
+        googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions);
     }
 }

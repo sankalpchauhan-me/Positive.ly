@@ -35,7 +35,7 @@ public class SplashScreen extends AppCompatActivity {
     private void checkIfUserIsAuthenticated() {
         splashViewModel.checkIfUserIsAuthenticated();
         splashViewModel.isUserAuthenticatedLiveData.observe(this, user -> {
-            Timber.e("Test "+user.isAuthenticated);
+            Timber.d("Test " + user.isAuthenticated);
             if (!user.isAuthenticated) {
                 goToHomePageActivity();
                 finish();
@@ -53,11 +53,11 @@ public class SplashScreen extends AppCompatActivity {
     private void getUserFromDatabase(String uid) {
         splashViewModel.setUid(uid);
         splashViewModel.userLiveData.observe(this, user -> {
-            if(user!=null) {
+            if (user != null) {
                 goToMainActivity(user);
                 finish();
             } else {
-                if(DefaultPrefSettings.getInstance().isUserAnonymous()){
+                if (DefaultPrefSettings.getInstance().isUserAnonymous()) {
                     goToMainActivity(null);
                     finish();
                 }
@@ -67,7 +67,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private void goToMainActivity(User user) {
         Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-        if(user!=null) {
+        if (user != null) {
             intent.putExtra(USER, user);
         }
         startActivity(intent);

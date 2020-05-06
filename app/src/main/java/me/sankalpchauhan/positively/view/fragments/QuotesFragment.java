@@ -40,11 +40,11 @@ public class QuotesFragment extends Fragment implements QuotesAdapter.QuotesAdap
     @BindView(R.id.quotesRv)
     RecyclerView quotesRecycler;
     Context context;
-    private QuotesAdapter quotesAdapter;
     List<Quotes> quotesList = new ArrayList<>();
     List<String> imageUrl = new ArrayList<>();
+    private QuotesAdapter quotesAdapter;
 
-    public QuotesFragment(){
+    public QuotesFragment() {
 
     }
 
@@ -64,23 +64,23 @@ public class QuotesFragment extends Fragment implements QuotesAdapter.QuotesAdap
     }
 
 
-    private void setUpRecyclerView(){
+    private void setUpRecyclerView() {
         StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(utility.calculateNoOfColumns(context), RecyclerView.VERTICAL);
         quotesRecycler.setLayoutManager(staggeredGridLayoutManager);
         quotesRecycler.setHasFixedSize(true);
         quotesAdapter = new QuotesAdapter(this);
         quotesRecycler.setAdapter(quotesAdapter);
-        if(getActivity() instanceof MainActivity){
-            imageUrl.addAll (((MainActivity) getActivity()).getQuotesImageUrlList());
+        if (getActivity() instanceof MainActivity) {
+            imageUrl.addAll(((MainActivity) getActivity()).getQuotesImageUrlList());
             quotesList.addAll(((MainActivity) getActivity()).getQuotesList());
             quotesAdapter.setQuoteData(((MainActivity) getActivity()).getQuotesList(), ((MainActivity) getActivity()).getQuotesImageUrlList());
         }
 
-        Timber.e("Item Couunt: "+quotesAdapter.getItemCount());
-        if(quotesAdapter.getItemCount()==0){
+        Timber.d("Item Couunt: " + quotesAdapter.getItemCount());
+        if (quotesAdapter.getItemCount() == 0) {
             errorImage.setVisibility(View.VISIBLE);
             errorView.setVisibility(View.VISIBLE);
-            if(!isOnline()){
+            if (!isOnline()) {
                 errorView.setText(R.string.oops_network_error);
             }
         }
@@ -93,7 +93,7 @@ public class QuotesFragment extends Fragment implements QuotesAdapter.QuotesAdap
         i.putExtra(Constants.QUOTES_DATA, quotesList.get(quotePosition));
         i.putExtra(Constants.QUOTES_IMAGE_DATA, imageUrl.get(imagePosition));
         ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(getActivity(), (View)imageView, imageView.getResources().getString(R.string.shared_thumbnail));
+                makeSceneTransitionAnimation(getActivity(), (View) imageView, imageView.getResources().getString(R.string.shared_thumbnail));
         startActivity(i, options.toBundle());
     }
 }

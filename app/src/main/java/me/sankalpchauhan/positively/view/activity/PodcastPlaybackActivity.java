@@ -75,9 +75,7 @@ import static me.sankalpchauhan.positively.utils.utility.getUserAgent;
 
 public class PodcastPlaybackActivity extends AppCompatActivity implements Player.EventListener {
     private static final String DOWNLOAD_CONTENT_DIRECTORY = "downloads";
-    private Podcast podcast;
     ExoPlayer mExoPlayer;
-    private String userAgent;
     @BindView(R.id.video_view)
     PlayerView mExoPlayerView;
     @BindView(R.id.controls)
@@ -88,6 +86,8 @@ public class PodcastPlaybackActivity extends AppCompatActivity implements Player
     TextView podcastTitle;
     @BindView(R.id.up_navigation)
     FloatingActionButton upNavigation;
+    private Podcast podcast;
+    private String userAgent;
     private Cache downloadCache;
     private File downloadDirectory;
     private DatabaseProvider databaseProvider;
@@ -102,7 +102,7 @@ public class PodcastPlaybackActivity extends AppCompatActivity implements Player
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent catchIntent = getIntent();
-        if(catchIntent.hasExtra(Constants.PODCAST_DATA)){
+        if (catchIntent.hasExtra(Constants.PODCAST_DATA)) {
             podcast = (Podcast) catchIntent.getSerializableExtra(Constants.PODCAST_DATA);
             mediaDescriptionAdapter = new PlayerNotificationManager.MediaDescriptionAdapter() {
                 @Override
@@ -135,7 +135,7 @@ public class PodcastPlaybackActivity extends AppCompatActivity implements Player
         setContentView(R.layout.activity_podcast_playback);
         ButterKnife.bind(this);
         userAgent = getUserAgent(this, "Positive.ly");
-        if(podcast.getTitleOriginal()!=null) {
+        if (podcast.getTitleOriginal() != null) {
             podcastTitle.setText(podcast.getTitleOriginal());
         }
         upNavigation.setOnClickListener(new View.OnClickListener() {
@@ -160,11 +160,11 @@ public class PodcastPlaybackActivity extends AppCompatActivity implements Player
                             public void onGenerated(@Nullable Palette palette) {
                                 Palette.Swatch backdropSwtch1 = palette.getLightVibrantSwatch();
                                 Palette.Swatch backdropSwtch2 = palette.getDarkMutedSwatch();
-                                if(backdropSwtch1==null || backdropSwtch2==null){
-                                    Timber.e("Test");
+                                if (backdropSwtch1 == null || backdropSwtch2 == null) {
+                                    Timber.d("Test");
                                     GradientDrawable gd1 = new GradientDrawable(
                                             GradientDrawable.Orientation.TOP_BOTTOM,
-                                            new int[] {Color.rgb(116,209,77),Color.rgb(56,120,29)});
+                                            new int[]{Color.rgb(116, 209, 77), Color.rgb(56, 120, 29)});
                                     gd1.setCornerRadius(0f);
                                     preInitializePlayer();
                                     constraintLayout.setBackground(gd1);
@@ -172,7 +172,7 @@ public class PodcastPlaybackActivity extends AppCompatActivity implements Player
                                 }
                                 GradientDrawable gd2 = new GradientDrawable(
                                         GradientDrawable.Orientation.TOP_BOTTOM,
-                                        new int[] {backdropSwtch1.getRgb(),backdropSwtch2.getRgb()});
+                                        new int[]{backdropSwtch1.getRgb(), backdropSwtch2.getRgb()});
                                 gd2.setCornerRadius(0f);
                                 constraintLayout.setBackground(gd2);
                                 upNavigation.setBackgroundColor(backdropSwtch1.getRgb());
@@ -187,11 +187,12 @@ public class PodcastPlaybackActivity extends AppCompatActivity implements Player
             public void onBitmapFailed(Exception e, Drawable errorDrawable) {
                 GradientDrawable gd1 = new GradientDrawable(
                         GradientDrawable.Orientation.TOP_BOTTOM,
-                        new int[] {Color.rgb(116,209,77),Color.rgb(56,120,29)});
+                        new int[]{Color.rgb(116, 209, 77), Color.rgb(56, 120, 29)});
                 gd1.setCornerRadius(0f);
                 preInitializePlayer();
                 constraintLayout.setBackground(gd1);
             }
+
             @Override
             public void onPrepareLoad(Drawable placeHolderDrawable) {
 
@@ -215,7 +216,7 @@ public class PodcastPlaybackActivity extends AppCompatActivity implements Player
         super.onDestroy();
     }
 
-    public void preInitializePlayer(){
+    public void preInitializePlayer() {
         mExoPlayerView.setVisibility(View.GONE);
         if (!podcast.getAudio().isEmpty()) {
             initializePlayer();

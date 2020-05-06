@@ -66,12 +66,12 @@ public class SignUpActualActivity extends AppCompatActivity {
         createAccountOrLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(isCreation()){
-                    if(validateSignUpForm()){
+                if (isCreation()) {
+                    if (validateSignUpForm()) {
                         signUpWithEmail(SignUpActualActivity.this, userEmail.getText().toString(), userPsssword.getText().toString(), userName.getText().toString());
                     }
                 } else {
-                    if(validateSignInForm()){
+                    if (validateSignInForm()) {
                         emailSignIn();
                     }
                 }
@@ -189,8 +189,8 @@ public class SignUpActualActivity extends AppCompatActivity {
         return valid;
     }
 
-    public boolean isCreation(){
-        if(type.equals(SIGN_IN)){
+    public boolean isCreation() {
+        if (type.equals(SIGN_IN)) {
             return false;
         }
         return true;
@@ -200,8 +200,8 @@ public class SignUpActualActivity extends AppCompatActivity {
         authViewModel.signUpWithEmail(context, email, password, name);
         createAccountOrLogin.setVisibility(View.INVISIBLE);
         authViewModel.authenticatedUserLiveData.observe(this, authenticatedUser -> {
-            if(authenticatedUser!=null) {
-                if(DefaultPrefSettings.getInstance().isUserAnonymous()){
+            if (authenticatedUser != null) {
+                if (DefaultPrefSettings.getInstance().isUserAnonymous()) {
                     AuthCredential credential = EmailAuthProvider.getCredential(email, password);
                     authViewModel.linkCredential(credential);
                     authenticatedUser.isNew = true;
@@ -240,12 +240,12 @@ public class SignUpActualActivity extends AppCompatActivity {
     }
 
 
-    private void emailSignIn(){
-        if(validateSignInForm()){
+    private void emailSignIn() {
+        if (validateSignInForm()) {
             authViewModel.signInWithEmail(this, userEmail.getText().toString(), userPsssword.getText().toString());
             createAccountOrLogin.setVisibility(View.INVISIBLE);
             authViewModel.authenticatedUserLiveData.observe(this, authenticatedUser -> {
-                if(authenticatedUser!=null) {
+                if (authenticatedUser != null) {
                     if (authenticatedUser.isNew) {
                         createNewUser(authenticatedUser);
                     } else {
@@ -258,12 +258,12 @@ public class SignUpActualActivity extends AppCompatActivity {
         }
     }
 
-    public void setCreateAccountOrLoginVisible(){
+    public void setCreateAccountOrLoginVisible() {
         createAccountOrLogin.setVisibility(View.VISIBLE);
     }
 
-    public void userForgotPassword(){
-        if(!userEmail.getText().toString().isEmpty()) {
+    public void userForgotPassword() {
+        if (!userEmail.getText().toString().isEmpty()) {
             authViewModel.sendPasswordReset(this, userEmail.getText().toString());
         } else {
             userEmail.setError(getResources().getString(R.string.Required));

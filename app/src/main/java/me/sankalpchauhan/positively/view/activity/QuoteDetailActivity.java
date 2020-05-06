@@ -47,7 +47,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent i = getIntent();
-        if(i.hasExtra(Constants.QUOTES_DATA)){
+        if (i.hasExtra(Constants.QUOTES_DATA)) {
             quotes = (Quotes) i.getSerializableExtra(Constants.QUOTES_DATA);
             imageUrl = i.getStringExtra(Constants.QUOTES_IMAGE_DATA);
         }
@@ -55,13 +55,13 @@ public class QuoteDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quote_detail);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar()!=null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         toolbar.setTitle(getResources().getString(R.string.positive_ly_quote_title));
         Picasso.get().load(imageUrl).into(quoteImage);
         quoteText.setText(quotes.getText());
-        if(quotes.getAuthor()!=null){
+        if (quotes.getAuthor() != null) {
             quoteAuthour.setText(String.format("- By %s", quotes.getAuthor()));
         } else {
             quoteAuthour.setVisibility(View.GONE);
@@ -69,7 +69,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
         shareFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String shareBody = "\" "+ quotes.getText()+"\" "+getResources().getString(R.string.get_download_now);
+                String shareBody = "\" " + quotes.getText() + "\" " + getResources().getString(R.string.get_download_now);
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
                 sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_subject));
@@ -85,7 +85,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
                 return true;

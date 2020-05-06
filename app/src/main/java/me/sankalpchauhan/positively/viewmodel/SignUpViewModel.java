@@ -14,9 +14,9 @@ import me.sankalpchauhan.positively.service.repository.LoginRepository;
 
 public class SignUpViewModel extends AndroidViewModel {
     public LiveData<User> createdUserLiveData;
-    private LoginRepository authRepository;
     public LiveData<User> authenticatedUserLiveData;
     public LiveData<Boolean> isCredentialLinked;
+    private LoginRepository authRepository;
 
     public SignUpViewModel(@NonNull Application application) {
         super(application);
@@ -26,11 +26,12 @@ public class SignUpViewModel extends AndroidViewModel {
     public void signInWithGoogle(AuthCredential googleAuthCredential) {
         authenticatedUserLiveData = authRepository.firebaseSignInWithGoogle(googleAuthCredential);
     }
+
     public void createUser(User authenticatedUser) {
         createdUserLiveData = authRepository.createUserInFirestoreIfNotExists(authenticatedUser);
     }
 
-    public void linkCredential(AuthCredential credential){
+    public void linkCredential(AuthCredential credential) {
         isCredentialLinked = authRepository.linkCredential(credential);
     }
 

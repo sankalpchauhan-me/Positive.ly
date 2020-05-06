@@ -13,10 +13,10 @@ import me.sankalpchauhan.positively.service.model.User;
 import me.sankalpchauhan.positively.service.repository.LoginRepository;
 
 public class SignUpActualViewModel extends AndroidViewModel {
-    private LoginRepository authRepository;
     public LiveData<User> authenticatedUserLiveData;
     public LiveData<Boolean> isCredentialLinked;
     public LiveData<User> createdUserLiveData;
+    private LoginRepository authRepository;
 
     public SignUpActualViewModel(@NonNull Application application) {
         super(application);
@@ -28,17 +28,18 @@ public class SignUpActualViewModel extends AndroidViewModel {
     }
 
     public void sendPasswordReset(Context context, String email) {
-        authRepository.sendPasswordReset(context,email);
+        authRepository.sendPasswordReset(context, email);
     }
 
-    public void linkCredential(AuthCredential credential){
+    public void linkCredential(AuthCredential credential) {
         isCredentialLinked = authRepository.linkCredential(credential);
     }
+
     public void createUser(User authenticatedUser) {
         createdUserLiveData = authRepository.createUserInFirestoreIfNotExists(authenticatedUser);
     }
 
-    public void signInWithEmail(Context context, String email, String password){
+    public void signInWithEmail(Context context, String email, String password) {
         authenticatedUserLiveData = authRepository.firebaseSignInWithEmail(context, email, password);
     }
 }
