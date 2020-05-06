@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
@@ -32,6 +34,8 @@ import me.sankalpchauhan.positively.service.model.Podcast;
 public class PodcastDetailActivity extends AppCompatActivity {
     private boolean isTextViewClicked =false;
     private Podcast podcast;
+    @BindView(R.id.adView)
+    AdView adView;
     @BindView(R.id.app_bar)
     AppBarLayout appBarLayout;
     @BindView(R.id.podcast_image)
@@ -115,6 +119,8 @@ public class PodcastDetailActivity extends AppCompatActivity {
                 startActivity(i, option.toBundle());
             }
         });
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
     public static String getDate(long milliSeconds, String dateFormat)

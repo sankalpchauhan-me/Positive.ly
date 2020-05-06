@@ -155,7 +155,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void toastMessage(String name) {
-        Toast.makeText(this, "Hi " + name + "!\n" + "Your account was successfully created.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getResources().getString(R.string.hi) + name + "!\n" + getResources().getString(R.string.acount_success_creation), Toast.LENGTH_LONG).show();
     }
 
     private void goToMainActivity(User user) {

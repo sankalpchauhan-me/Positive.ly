@@ -1,6 +1,7 @@
 package me.sankalpchauhan.positively.view.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
@@ -23,6 +25,8 @@ import butterknife.ButterKnife;
 import me.sankalpchauhan.positively.R;
 import me.sankalpchauhan.positively.service.model.Quotes;
 import timber.log.Timber;
+
+import static me.sankalpchauhan.positively.PositivelyApp.getAnalyticsInstance;
 
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolder> {
     private List<Quotes> quotesList;
@@ -62,7 +66,6 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
                         mCallback.onClick(randomQuote, randomImage, holder.quoteBackground);
                     }
                 });
-
             }
 
             @Override
@@ -70,6 +73,11 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
                 holder.placeholder.stopShimmer();
                 holder.placeholder.setVisibility(View.GONE);
                 holder.mainCard.setVisibility(View.VISIBLE);
+                Bundle b = new Bundle();
+                b.putString(FirebaseAnalytics.Param.ITEM_ID, String.valueOf(randomImage));
+                b.putString(FirebaseAnalytics.Param.ITEM_NAME, imageUrl);
+                b.putString(FirebaseAnalytics.Param.CONTENT_TYPE, "Status");
+                getAnalyticsInstance().logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, b);
                 Timber.e("Image with error"+imageList.get(randomImage)+" position in database: "+randomImage);
                 e.printStackTrace();
             }

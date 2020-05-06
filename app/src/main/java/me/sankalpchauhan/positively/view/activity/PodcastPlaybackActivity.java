@@ -107,7 +107,7 @@ public class PodcastPlaybackActivity extends AppCompatActivity implements Player
             mediaDescriptionAdapter = new PlayerNotificationManager.MediaDescriptionAdapter() {
                 @Override
                 public String getCurrentSubText(Player player) {
-                    return "Sub text";
+                    return podcast.getPublisherOriginal();
                 }
 
                 @Override

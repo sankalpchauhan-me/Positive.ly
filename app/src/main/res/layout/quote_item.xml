@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher"
             android:scaleType="centerCrop"
+            android:contentDescription="@string/quote_image"
             android:foreground="@drawable/image_overlay_dark"/>
 
         <RelativeLayout
@@ -44,7 +45,7 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:text="Quote Title"
+                android:text="@string/quote_title"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"

@@ -4,12 +4,14 @@ import android.app.Application;
 import android.content.Context;
 
 import com.google.android.gms.ads.MobileAds;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import me.sankalpchauhan.positively.config.DefaultPrefSettings;
 import timber.log.Timber;
 
 public class PositivelyApp extends Application {
     private static PositivelyApp instance;
+    private static FirebaseAnalytics mFirebaseAnalytics;
 
     public static PositivelyApp getInstance(){
         return instance;
@@ -29,5 +31,11 @@ public class PositivelyApp extends Application {
         }
         DefaultPrefSettings.init(this);
         MobileAds.initialize(this);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+    }
+
+    //Only Single Instance
+    public static FirebaseAnalytics getAnalyticsInstance(){
+        return mFirebaseAnalytics;
     }
 }

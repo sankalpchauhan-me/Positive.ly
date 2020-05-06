@@ -163,7 +163,7 @@ public class LoginRepository {
                     });
                 } else if(document.get("name")==null || document.get("photoUrl")==null){
                     uidRef.update("name", FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
-                    uidRef.update("photoUrl", FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl());
+                    //uidRef.update("photoUrl", FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl());
                     newUserMutableLiveData.setValue(authenticatedUser);
                 }
                 else {

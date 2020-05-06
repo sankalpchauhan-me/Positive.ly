@@ -28,7 +28,7 @@
             android:textSize="20sp"
             android:background="@color/background"
             android:layout_centerInParent="true"
-            android:text="Podcast title"
+            android:text="@string/podcast_title"
             android:visibility="visible"
             android:textColor="@color/white"
             android:layout_marginBottom="36dp"

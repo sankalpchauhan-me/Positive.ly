@@ -49,7 +49,7 @@ public class RecorderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recorder);
         ButterKnife.bind(this);
-        toolbar.setTitle("Positive.ly Voice Logs");
+        toolbar.setTitle(getResources().getString(R.string.positive_ly_voice_logs));
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         addFAB.setOnClickListener(new View.OnClickListener() {

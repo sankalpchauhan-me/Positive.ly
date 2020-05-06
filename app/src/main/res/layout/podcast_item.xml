@@ -29,6 +29,7 @@
             android:layout_height="200dp"
             android:src="@mipmap/ic_launcher"
             android:transitionName="sharedThumbnail"
+            android:contentDescription="@string/podcast_thumbnail_image"
             android:foreground="@drawable/image_overlay"/>
 
         <RelativeLayout
@@ -49,7 +50,7 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center|bottom"
                 android:layout_marginBottom="20dp"
-                android:text="Podcast title"
+                android:text="@string/podcast_title"
                 android:textAlignment="center"
                 android:maxLines="2"
                 android:ellipsize="end"

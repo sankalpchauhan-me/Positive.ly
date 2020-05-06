@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/recording_empty"
             android:layout_centerInParent="true"
+            android:contentDescription="@string/no_result_found"
             />
         <TextView
             android:id="@+id/empty_view"
@@ -28,7 +29,7 @@
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Record your first Voice Log by pressing +"
+            android:text="@string/record_your_first_voice_log_by_pressing"
             android:fontFamily="monospace"/>
 
         <androidx.recyclerview.widget.RecyclerView

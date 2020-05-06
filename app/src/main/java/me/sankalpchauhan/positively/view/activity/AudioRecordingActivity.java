@@ -127,8 +127,8 @@ public class AudioRecordingActivity extends AppCompatActivity implements MediaPl
                 } else {
                     Log.i("1", "Permission is again not granted");
                     havePermission = false;
-                    Snackbar mySnackbar = Snackbar.make(findViewById(android.R.id.content), "Please ennable the permissions", Snackbar.LENGTH_SHORT);
-                    mySnackbar.setAction("ENABLE", new View.OnClickListener() {
+                    Snackbar mySnackbar = Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.please_enable_permissions), Snackbar.LENGTH_SHORT);
+                    mySnackbar.setAction(getResources().getString(R.string.enable_btn_permission), new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
                             startActivity(new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:" + BuildConfig.APPLICATION_ID)));
@@ -192,15 +192,15 @@ public class AudioRecordingActivity extends AppCompatActivity implements MediaPl
         mRecorder = null;
         chronometer.stop();
         chronometer.setBase(SystemClock.elapsedRealtime());
-        Toast.makeText(this, "Voice Log Saved", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.voice_log_saved, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onBackPressed() {
         if (isRecording) {
             new AlertDialog.Builder(AudioRecordingActivity.this)
-                    .setTitle("Voice Log not Saved")
-                    .setMessage("You have an ongoing voice log, do you want to discard it")
+                    .setTitle(getResources().getString(R.string.voice_log_not_saved))
+                    .setMessage(getResources().getString(R.string.ongoing_voice_log))
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {

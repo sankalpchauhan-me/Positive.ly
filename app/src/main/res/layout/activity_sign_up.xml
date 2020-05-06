@@ -26,7 +26,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:contentDescription="@string/back_button"/>
 
     <ImageView
         android:id="@+id/imageView"
@@ -42,7 +43,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.108"
+        android:contentDescription="@string/positive_ly_logo"/>
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
@@ -80,7 +82,7 @@
             android:drawableLeft="@drawable/ic_new_google_favicon"
             android:drawablePadding="5dp"
             android:padding="10dp"
-            android:text="Sign in with Google" />
+            android:text="@string/sign_in_with_google" />
         <Button
             android:id="@+id/sign_in_with_email"
             android:layout_width="match_parent"
@@ -90,7 +92,7 @@
             android:drawableLeft="@drawable/ic_email_black_24dp"
             android:drawablePadding="5dp"
             android:padding="10dp"
-            android:text="Sign in with email" />
+            android:text="@string/sign_in_with_email" />
 
         <Button
             android:id="@+id/create_new_account"
@@ -101,7 +103,7 @@
             android:drawableLeft="@drawable/ic_person_add_black_24dp"
             android:drawablePadding="5dp"
             android:padding="10dp"
-            android:text="Create new account" />
+            android:text="@string/create_new_account" />
 
     </LinearLayout>
 
@@ -112,7 +114,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="- By Continuing you agree to the Terms of Service and \n Privacy policy"
+        android:text="@string/by_continuing_you_agree_to_the_terms_of_service_and_n_privacy_policy"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -23,6 +23,7 @@
                 android:id="@+id/podcast_image"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/podcast_backdrop_image"
                 android:adjustViewBounds="true"
                 android:foreground="@drawable/image_overlay_dark"
                 android:scaleType="centerCrop"
@@ -66,7 +67,8 @@
                         android:id="@+id/podcast_thumbnail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/logo" />
+                        android:src="@drawable/logo"
+                        android:contentDescription="@string/podcast_thumbnail_image"/>
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/podcast_play"
@@ -90,7 +92,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="Length"
+                        android:text="@string/length"
                         android:textAlignment="center"
                         android:textSize="28sp"
                         android:textStyle="bold" />
@@ -101,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="16dp"
-                        android:text="1 hour 45 min"
+                        android:text="@string/time_sample"
                         android:textAlignment="center"
                         android:textSize="18sp"
                         android:textStyle="italic" />
@@ -138,7 +140,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Publishers:"
+                android:text="@string/publishers"
                 android:textSize="20sp" />
 
             <TextView
@@ -147,14 +149,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="casual"
-                android:text="Test Publisher 1, Test publisher 2"
+                android:text="@string/publishers_sample"
                 android:textColor="@color/black" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Publish Date:"
+                android:text="@string/publish_date"
                 android:textSize="20sp" />
 
             <TextView
@@ -163,8 +165,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="casual"
-                android:text="5 May 2020"
+                android:text="@string/date_sample"
                 android:textColor="@color/black" />
+            <com.google.android.gms.ads.AdView
+                android:layout_gravity="bottom"
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:layout_marginTop="30dp"
+                android:id="@+id/adView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/BANNER_AD_ID">
+            </com.google.android.gms.ads.AdView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 

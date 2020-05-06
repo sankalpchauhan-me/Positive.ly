@@ -118,7 +118,7 @@ public class SignUpActualActivity extends AppCompatActivity {
 
         String email = userEmail.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            userEmail.setError("Required.");
+            userEmail.setError(getResources().getString(R.string.Required));
             valid = false;
         } else {
             userEmail.setError(null);
@@ -126,16 +126,16 @@ public class SignUpActualActivity extends AppCompatActivity {
 
         String password = userPsssword.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            userPsssword.setError("Required.");
+            userPsssword.setError(getResources().getString(R.string.Required));
             valid = false;
         } else {
             userPsssword.setError(null);
         }
         if (password.length() < 6) {
-            userPsssword.setError("Password should be at least 6 characters");
+            userPsssword.setError(getResources().getString(R.string.min_password_length_error));
         }
         if (!isEmailValid(email)) {
-            userEmail.setError("Email Not Valid");
+            userEmail.setError(getResources().getString(R.string.email_not_valid));
             valid = false;
         }
 
@@ -147,20 +147,20 @@ public class SignUpActualActivity extends AppCompatActivity {
 
         String useremail = userEmail.getText().toString();
         if (TextUtils.isEmpty(useremail.trim())) {
-            userEmail.setError("Required");
+            userEmail.setError(getResources().getString(R.string.Required));
             valid = false;
         } else {
             userEmail.setError(null);
         }
 
         if (!userPsssword.getText().toString().equals(userConfPassword.getText().toString())) {
-            userConfPassword.setError("Passwords Do Not Match");
+            userConfPassword.setError(getResources().getString(R.string.passwords_do_not_match));
             valid = false;
         }
 
         String username = userName.getText().toString();
         if (TextUtils.isEmpty(username.trim())) {
-            userName.setError("Required.");
+            userName.setError(getResources().getString(R.string.Required));
             valid = false;
         } else {
             userName.setError(null);
@@ -168,19 +168,19 @@ public class SignUpActualActivity extends AppCompatActivity {
 
         String userpass = userPsssword.getText().toString();
         if (TextUtils.isEmpty(userpass.trim())) {
-            userPsssword.setError("Required.");
+            userPsssword.setError(getResources().getString(R.string.Required));
             valid = false;
         } else {
             userPsssword.setError(null);
         }
 
         if (userpass.length() < 6) {
-            userPsssword.setError("Password should be at least 6 characters");
+            userPsssword.setError(getResources().getString(R.string.min_password_length_error));
         }
 
 
         if (!isEmailValid(useremail)) {
-            userEmail.setError("Email Not Valid");
+            userEmail.setError(getResources().getString(R.string.email_not_valid));
             valid = false;
         }
 
@@ -235,8 +235,9 @@ public class SignUpActualActivity extends AppCompatActivity {
     }
 
     private void toastMessage(String name) {
-        Toast.makeText(this, "Hi " + name + "!\n" + "Your account was successfully created. A verification mail was sent.", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getResources().getString(R.string.hi) + name + "!\n" + getResources().getString(R.string.acount_success_creation), Toast.LENGTH_LONG).show();
     }
+
 
     private void emailSignIn(){
         if(validateSignInForm()){
@@ -264,7 +265,7 @@ public class SignUpActualActivity extends AppCompatActivity {
         if(!userEmail.getText().toString().isEmpty()) {
             authViewModel.sendPasswordReset(this, userEmail.getText().toString());
         } else {
-            userEmail.setError("Required");
+            userEmail.setError(getResources().getString(R.string.Required));
         }
     }
 

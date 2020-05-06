@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         } else {
             DefaultPrefSettings.getInstance().setUserAnonymous(false);
             if (!firebaseAuth.getCurrentUser().isEmailVerified()) {
-                setSnackBar(parent, "Email is not verified");
+                setSnackBar(parent, getResources().getString(R.string.email_not_verified));
             }
         }
         initDrawer();
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                     }
                     //TODO: HIDE EMPTY STATE
                 } else {
-                    Toast.makeText(MainActivity.this, "Something Went Wrong...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, getResources().getString(R.string.something_went_wrong), Toast.LENGTH_SHORT).show();
                     //TODO: SHOW EMPTY STATE
                 }
             }
@@ -198,8 +198,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                 name = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
             }
         } else {
-            email = "Click to Log In/Sign Up";
-            name = "User";
+            email = getResources().getString(R.string.click_here_to_log_in);
+            name = getResources().getString(R.string.user_plain_text);
         }
 
         if (FirebaseAuth.getInstance().getCurrentUser().getPhotoUrl() != null) {
@@ -240,9 +240,9 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                 .withActivity(this)
                 .withToolbar(toolbar)
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withIdentifier(1).withName("Sign Out"),
+                        new PrimaryDrawerItem().withIdentifier(1).withName(getResources().getString(R.string.sign_out)),
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName("Build Version: " + appVersionName).withSelectable(false)
+                        new SecondaryDrawerItem().withName(getResources().getString(R.string.build_version) + appVersionName).withSelectable(false)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override

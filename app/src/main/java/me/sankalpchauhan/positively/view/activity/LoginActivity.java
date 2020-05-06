@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                         Timber.e("Test " + user.isAnonymous);
                         goToMainActivity(user);
                     } else {
-                        Toast.makeText(LoginActivity.this, "Some error occurred..", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, getResources().getString(R.string.Some_Error_Occured), Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -108,12 +108,12 @@ public class LoginActivity extends AppCompatActivity {
     private boolean verifyForm() {
         boolean valid = true;
         if (!isEmailValid(email.getText().toString())) {
-            email.setError("Invalid email");
+            email.setError(getResources().getString(R.string.Invalid_email));
             valid = false;
         }
 
         if (email.getText().toString().isEmpty()) {
-            email.setError("Required");
+            email.setError(getResources().getString(R.string.Required));
             valid = false;
         }
 
@@ -190,7 +190,7 @@ public class LoginActivity extends AppCompatActivity {
                                     public void onChanged(User user) {
                                         continueButton.setVisibility(View.VISIBLE);
                                         if(user!=null) {
-                                            Toast.makeText(LoginActivity.this, "Signed In", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.signed_in), Toast.LENGTH_SHORT).show();
                                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                             finish();
                                             startActivity(i);
@@ -226,14 +226,14 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 getInstance().getCurrentUser().updateEmail(newEmail);
                                 //Intent i = new Intent(LoginActivity.this, SettingsActivity.class);
-                                Toast.makeText(LoginActivity.this, "Email updated to " + newEmail, Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, getResources().getString(R.string.email_updated_to) + newEmail, Toast.LENGTH_LONG).show();
                                 DefaultPrefSettings.getInstance().setUserEmail(newEmail);
                                 DefaultPrefSettings.getInstance().removeUpdateEmail();
                                 //i.putExtra("transfer", "EmailChanged");
                                 //startActivity(i);
                                 //finishAndRemoveTask();
                             } else {
-                                Toast.makeText(LoginActivity.this, "Error reauthenticating " + task.getException(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, getResources().getString(R.string.error_reauthenticating) + task.getException(), Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -245,10 +245,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void updateViewOnSignIn() {
-        Toast.makeText(LoginActivity.this, "Verification email Sent", Toast.LENGTH_LONG).show();
+        Toast.makeText(LoginActivity.this, getResources().getString(R.string.verification_email_sent), Toast.LENGTH_LONG).show();
         new AlertDialog.Builder(LoginActivity.this)
-                .setTitle("Check Email")
-                .setMessage("A link has been sent to your email account, you can use that to sign in")
+                .setTitle(getResources().getString(R.string.check_email))
+                .setMessage(getResources().getString(R.string.link_sent_message))
                 .setNegativeButton(android.R.string.yes, null)
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show();

@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
@@ -23,6 +25,8 @@ import me.sankalpchauhan.positively.config.Constants;
 import me.sankalpchauhan.positively.service.model.Quotes;
 
 public class QuoteDetailActivity extends AppCompatActivity {
+    @BindView(R.id.adView)
+    AdView adView;
     @BindView(R.id.share_fab)
     FloatingActionButton shareFAB;
     @BindView(R.id.toolbar)
@@ -50,7 +54,7 @@ public class QuoteDetailActivity extends AppCompatActivity {
         if(getSupportActionBar()!=null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        toolbar.setTitle("Positive.ly Quote");
+        toolbar.setTitle(getResources().getString(R.string.positive_ly_quote_title));
         Picasso.get().load(imageUrl).into(quoteImage);
         quoteText.setText(quotes.getText());
         if(quotes.getAuthor()!=null){
@@ -61,14 +65,17 @@ public class QuoteDetailActivity extends AppCompatActivity {
         shareFAB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String shareBody = "\" "+ quotes.getText()+"\" "+" I found this quote on positive.ly Download Now:- **Link**";
+                String shareBody = "\" "+ quotes.getText()+"\" "+getResources().getString(R.string.get_download_now);
                 Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
                 sharingIntent.setType("text/plain");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Positive.ly Quote");
+                sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_subject));
                 sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-                startActivity(Intent.createChooser(sharingIntent, "Share Using"));
+                startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.share_using)));
             }
         });
+
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
     }
 
     @Override
