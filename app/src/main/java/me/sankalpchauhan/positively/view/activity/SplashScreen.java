@@ -56,6 +56,7 @@ public class SplashScreen extends AppCompatActivity {
             } else {
                 if(DefaultPrefSettings.getInstance().isUserAnonymous()){
                     goToMainActivity(null);
+                    finish();
                 }
             }
         });

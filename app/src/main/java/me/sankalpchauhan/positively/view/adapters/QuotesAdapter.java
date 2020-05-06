@@ -27,6 +27,11 @@ import timber.log.Timber;
 public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolder> {
     private List<Quotes> quotesList;
     private List<String> imageList;
+    private final QuotesAdapterClickHandler mCallback;
+
+    public QuotesAdapter(QuotesAdapterClickHandler clickHandler){
+        mCallback = clickHandler;
+    }
 
     @NonNull
     @Override
@@ -51,6 +56,12 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
                 holder.placeholder.setVisibility(View.GONE);
                 holder.mainCard.setVisibility(View.VISIBLE);
                 holder.quoteText.setText(quotes.getText());
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mCallback.onClick(randomQuote, randomImage, holder.quoteBackground);
+                    }
+                });
 
             }
 
@@ -77,6 +88,10 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
         quotesList = quoteData;
         imageList =imageData;
         notifyDataSetChanged();
+    }
+
+    public interface QuotesAdapterClickHandler{
+        void onClick(int quotePosition, int imagePosition, View imageView);
     }
 
     public class QuoteHolder extends RecyclerView.ViewHolder{

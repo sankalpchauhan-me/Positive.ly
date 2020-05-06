@@ -353,4 +353,10 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
         super.onSaveInstanceState(outState);
         outState.putBoolean("SAVE_BUNDLE_MAIN", isPodcast);
     }
+
+    @Override
+    public void onBackPressed() {
+        //finishAndRemoveTask();
+        super.onBackPressed();
+    }
 }

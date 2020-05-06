@@ -3,7 +3,9 @@ package me.sankalpchauhan.positively.service.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Quotes {
+import java.io.Serializable;
+
+public class Quotes implements Serializable {
 
     @SerializedName("text")
     @Expose

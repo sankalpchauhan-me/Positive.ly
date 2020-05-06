@@ -17,6 +17,8 @@ public class Constants {
     public static final String QUOTES_IMAGES_COLLECTION_REFERENCE = "quotes_images";
     public static final String QUOTES_IMAGES_DOCUMENT_REFERENCE = "quotesImages";
     public static final String IMAGE_ARRAY = "imageArray";
+    public static final String QUOTES_DATA = "quotesData";
+    public static final String QUOTES_IMAGE_DATA = "imageData";
     //max number of retries before fail
     public static final int maxLimit = 3;
     // wait for 5 second before retrying network request
