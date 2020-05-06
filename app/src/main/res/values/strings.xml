@@ -96,4 +96,13 @@
     <string name="show_only_favorite_quotes">Show Favorite Quotes</string>
     <string name="no_favorites_selected">No Favorites Selected</string>
     <string name="user_fav_quotes">Favourite Quotes</string>
+    <string name="drop_down_button">Drop Down Button</string>
+    <string name="rewind_10_second">Rewind 10 Second</string>
+    <string name="repeat_exo_player_custom">Repeat</string>
+    <string name="play_exo_custom">Play</string>
+    <string name="pause_exo_custom">Pause</string>
+    <string name="forward_10_seconds">Forward 10 Seconds</string>
+    <string name="podcast_backdrop">Podcast Backdrop</string>
+    <string name="oops_something_went_wrong_fragment_podcast">Oops! Something Went Wrong. . .</string>
+    <string name="widget_title">Random Quote:</string>
 </resources>

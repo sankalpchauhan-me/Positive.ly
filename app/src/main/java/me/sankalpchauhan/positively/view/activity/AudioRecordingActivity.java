@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -160,7 +161,7 @@ public class AudioRecordingActivity extends AppCompatActivity implements MediaPl
         }
         Timber.d("I am here 5");
         Date currentTime = Calendar.getInstance().getTime();
-        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH mm a");
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH mm a", Locale.US);
         String formattedDate = df.format(currentTime);
         fileName = root.getAbsolutePath() + RECORDING_PATH + '/' + formattedDate + ".mp3";
         Timber.d(String.valueOf(fileName));

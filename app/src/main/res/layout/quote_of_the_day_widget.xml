@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="casual"
-        android:text="Random Quote:"
+        android:text="@string/widget_title"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="32sp"

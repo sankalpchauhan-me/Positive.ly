@@ -19,16 +19,19 @@
             android:id="@id/exo_rew"
             style="@style/ExoMediaButton.Rewind"
             android:src="@drawable/ic_replay_10_accent_24dp"
+            android:contentDescription="@string/rewind_10_second"
             android:tint="@color/colorAccent" />
 
         <ImageButton
             android:id="@id/exo_repeat_toggle"
             style="@style/ExoMediaButton"
+            android:contentDescription="@string/repeat_exo_player_custom"
             android:tint="@color/colorAccent" />
 
         <ImageButton
             android:id="@id/exo_play"
             style="@style/ExoMediaButton.Play"
+            android:contentDescription="@string/play_exo_custom"
             android:scaleType="fitCenter"
             android:tint="@color/colorAccent" />
 
@@ -36,11 +39,13 @@
             android:id="@id/exo_pause"
             style="@style/ExoMediaButton.Pause"
             android:scaleType="fitCenter"
+            android:contentDescription="@string/pause_exo_custom"
             android:tint="@color/colorAccent" />
 
         <ImageButton
             android:id="@id/exo_ffwd"
             style="@style/ExoMediaButton.FastForward"
+            android:contentDescription="@string/forward_10_seconds"
             android:src="@drawable/ic_forward_10_accent_24dp"
             android:tint="@color/colorAccent" />
 

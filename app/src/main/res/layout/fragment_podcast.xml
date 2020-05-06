@@ -30,7 +30,7 @@
             android:layout_below="@+id/empty_image"
             android:layout_marginTop="16dp"
             android:fontFamily="monospace"
-            android:text="Oops! Something Went Wrong. . ."
+            android:text="@string/oops_something_went_wrong_fragment_podcast"
             android:textAlignment="center"
             android:visibility="invisible" />
 

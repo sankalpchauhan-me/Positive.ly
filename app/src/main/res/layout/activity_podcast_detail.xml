@@ -128,6 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
+                android:contentDescription="@string/drop_down_button"
                 android:src="@drawable/ic_arrow_drop_down_black_24dp" />
 
             <View

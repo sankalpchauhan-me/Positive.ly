@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/button_background_round_rectangle"
-            android:drawableLeft="@drawable/ic_new_google_favicon"
+            android:drawableStart="@drawable/ic_new_google_favicon"
             android:drawablePadding="5dp"
             android:padding="10dp"
             android:text="@string/sign_in_with_google" />
@@ -91,7 +91,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_background_round_rectangle"
-            android:drawableLeft="@drawable/ic_email_black_24dp"
+            android:drawableStart="@drawable/ic_email_black_24dp"
             android:drawablePadding="5dp"
             android:padding="10dp"
             android:text="@string/sign_in_with_email" />
@@ -102,7 +102,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/button_background_round_rectangle"
-            android:drawableLeft="@drawable/ic_person_add_black_24dp"
+            android:drawableStart="@drawable/ic_person_add_black_24dp"
             android:drawablePadding="5dp"
             android:padding="10dp"
             android:text="@string/create_new_account" />

@@ -34,6 +34,7 @@
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_play_arrow_accent_24dp"
         android:transitionName="@string/record_fab_transition"
+        android:contentDescription="@string/play_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
