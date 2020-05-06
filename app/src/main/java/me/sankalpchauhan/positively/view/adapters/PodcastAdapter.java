@@ -60,6 +60,7 @@ public class PodcastAdapter extends RecyclerView.Adapter<PodcastAdapter.PodcastH
                                 Palette.Swatch backdropSwtch = palette.getDarkVibrantSwatch();
                                 if(backdropSwtch==null){
                                     Timber.e("Podcast Adapter: Test");
+                                    setViewsVisible(holder);
                                     return;
                                 }
                                 int transparentRGBInt = getColorWithAplha(backdropSwtch.getRgb(), 0.5f);

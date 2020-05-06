@@ -26,7 +26,7 @@
             android:textAlignment="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Oops! Something Went Wrong. . ."
+            android:text="@string/no_server_response"
             android:fontFamily="monospace"
             android:visibility="invisible"/>
 

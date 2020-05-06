@@ -57,6 +57,7 @@ import me.sankalpchauhan.positively.viewmodel.MainActivityViewModel;
 import timber.log.Timber;
 
 import static me.sankalpchauhan.positively.config.Constants.SERVER_DATA;
+import static me.sankalpchauhan.positively.utils.utility.isOnline;
 import static me.sankalpchauhan.positively.utils.utility.setSnackBar;
 
 public class MainActivity extends AppCompatActivity implements FirebaseAuth.AuthStateListener, BottomNavigationView.OnNavigationItemSelectedListener {
@@ -242,7 +243,8 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
                 .addDrawerItems(
                         new PrimaryDrawerItem().withIdentifier(1).withName(getResources().getString(R.string.sign_out)),
                         new DividerDrawerItem(),
-                        new SecondaryDrawerItem().withName(getResources().getString(R.string.build_version) + appVersionName).withSelectable(false)
+                        new SecondaryDrawerItem().withName(getResources().getString(R.string.build_version) + appVersionName).withSelectable(false),
+                        new SecondaryDrawerItem().withName(getResources().getString(R.string.listennotes_requirement)).withSelectable(false)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
@@ -297,6 +299,14 @@ public class MainActivity extends AppCompatActivity implements FirebaseAuth.Auth
     protected void onStart() {
         super.onStart();
         firebaseAuth.addAuthStateListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(!isOnline()){
+            Toast.makeText(this, "Please Check Your Network Connection", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

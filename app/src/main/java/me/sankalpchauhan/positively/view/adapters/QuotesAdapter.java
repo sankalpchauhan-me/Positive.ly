@@ -48,8 +48,15 @@ public class QuotesAdapter extends RecyclerView.Adapter<QuotesAdapter.QuoteHolde
     @Override
     public void onBindViewHolder(@NonNull QuoteHolder holder, int position) {
         holder.placeholder.startShimmer();
-        int randomImage = new Random().nextInt(imageList.size());
-        int randomQuote = new Random().nextInt(imageList.size());
+        int randomImage;
+        int randomQuote;
+        if(imageList.size()!=0) {
+            randomImage = new Random().nextInt(imageList.size());
+            randomQuote = new Random().nextInt(imageList.size());
+        } else {
+            randomQuote = new Random().nextInt(position);
+            randomImage = new Random().nextInt(position%20);
+        }
         Quotes quotes = quotesList.get(randomQuote);
         String imageUrl = imageList.get(randomImage);
 

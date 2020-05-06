@@ -87,4 +87,7 @@
     <string name="add_widget">Add widget</string>
     <string name="random_quote_initializer">Random quote will appear here, once the app is re-started</string>
     <string name="oops_network_error">Oops! Network Error, Please Check Your Connection</string>
+    <string name="no_internet">No Internet</string>
+    <string name="listennotes_requirement">Powered By ListenNotes API</string>
+    <string name="no_server_response">Oops! No Response from Sever, Please try restarting the app.</string>
 </resources>

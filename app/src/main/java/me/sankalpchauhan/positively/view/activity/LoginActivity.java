@@ -2,6 +2,7 @@ package me.sankalpchauhan.positively.view.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -39,6 +40,8 @@ import timber.log.Timber;
 import static com.google.firebase.auth.FirebaseAuth.getInstance;
 import static me.sankalpchauhan.positively.config.Constants.USER;
 import static me.sankalpchauhan.positively.utils.utility.isEmailValid;
+import static me.sankalpchauhan.positively.utils.utility.isOnline;
+import static me.sankalpchauhan.positively.utils.utility.setSnackBarNoAction;
 
 public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.skip_do_anonymous_sign_in)
@@ -50,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.continue_with_other)
     Button continueWithOther;
     //private boolean isUserAnonymous = false;
+    @BindView(R.id.login_parent)
+    ConstraintLayout parent;
     private LoginViewModel authViewModel;
 
     @Override
@@ -68,7 +73,11 @@ public class LoginActivity extends AppCompatActivity {
                         Timber.e("Test " + user.isAnonymous);
                         goToMainActivity(user);
                     } else {
-                        Toast.makeText(LoginActivity.this, getResources().getString(R.string.Some_Error_Occured), Toast.LENGTH_LONG).show();
+                        if(isOnline()) {
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.Some_Error_Occured), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, getResources().getString(R.string.no_internet), Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
             }
@@ -210,6 +219,9 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(!isOnline()){
+            setSnackBarNoAction(parent, getResources().getString(R.string.no_internet));
+        }
         initDynamicLink();
     }
 
