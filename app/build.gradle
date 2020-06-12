@@ -15,12 +15,24 @@ android {
         buildConfigField("String", "LISTEN_NOTES_API_KEY", LISTEN_NOTES_API_KEY)
         buildConfigField("String", "WEBCLIENT_ID", WEBCLIENT_ID)
     }
+    signingConfigs {
+
+        release {
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWORD
+        }
+    }
+
     buildTypes {
         debug {
+            signingConfig signingConfigs.debug
             resValue("string", "APP_AD_ID", "ca-app-pub-3940256099942544~3347511713")
             resValue("string", "BANNER_AD_ID", "ca-app-pub-3940256099942544/6300978111")
         }
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             resValue("string", "APP_AD_ID", "ca-app-pub-3940256099942544~3347511713")
