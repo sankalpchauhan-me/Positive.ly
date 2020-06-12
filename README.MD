@@ -146,4 +146,20 @@ Services I will use:
 - UI testing using espresso
 - Re-verify all edge cases are covered & all states are correctly handled by the app
 
+# How to build ?
+
+Create a Firebase Project and download the google_services.json file
+Put that file into the app folder and you are good to go
+
+Open terminal and type the below command to generate debug build
+
+`./gradlew assembleDebug`
+
+Open terminal and type the below command to generate release build
+
+`./gradlew assembleRelease`
+
+After running the above command, By default the output can be found in app/build/outputs/apk/debug/apk-debug.apk
+
+
 
